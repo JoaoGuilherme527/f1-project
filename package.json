@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@deemlol/next-icons": "^0.1.9",
     "axios": "^1.9.0",
+    "framer-motion": "^12.12.1",
     "lodash.debounce": "^4.0.8",
     "next": "15.3.1",
     "react": "^19.0.0",

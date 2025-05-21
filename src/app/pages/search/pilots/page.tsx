@@ -39,7 +39,7 @@ function DriverComponent({driver}: {driver: Driver}) {
 
 function DriversComponent({drivers}: {drivers: Array<Driver>}) {
     return (
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 pl-0 overflow-y-auto h-[calc(100vh-150px)]">
             {drivers
                 .sort((a, b) => (a.team_name ? a.team_name.localeCompare(b.team_name) : 0))
                 .map((driver) => (
@@ -84,11 +84,11 @@ export default function Pilots() {
     }
 
     return (
-        <div className="flex flex-col  p-4 py-4 gap-2">
+        <div className="flex flex-col py-4 gap-2 w-full h-screen">
             <h1 className="px-8 text-4xl text-white font-bold" style={{fontFamily: "Formula1 Display Bold"}}>
                 Pilots
             </h1>
-            <div className="flex flex-col gap-4 py-2">
+            <div className="flex flex-col gap-2 py-2 w-full h-full">
                 <div className="flex gap-2">
                     <div className="flex flex-row gap-2 items-center">
                         <button

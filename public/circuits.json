@@ -8,7 +8,7 @@
         "flag": "🇦🇺",
         "driverLapRecordHolder": "Charles Leclerc (2024)",
         "src": "/outlined_circuits/Australia.png",
-        "url": "/detailed_circuits/Australia.png"
+        "url": "/detailed_circuits/Australia.avif"
     },
     {
         "name": "Shanghai",
@@ -41,7 +41,7 @@
         "flag": "🇧🇭",
         "driverLapRecordHolder": "Lewis Hamilton (2020)",
         "src": "/outlined_circuits/Bahrain.png",
-        "url": "/detailed_circuits/Bahrain.png"
+        "url": "/detailed_circuits/Bahrain.avif"
     },
     {
         "name": "Jeddah",
@@ -52,7 +52,7 @@
         "flag": "🇸🇦",
         "driverLapRecordHolder": "Max Verstappen (2024)",
         "src": "/outlined_circuits/Saudi_Arabia.png",
-        "url": "/detailed_circuits/Saudi_Arabia.png"
+        "url": "/detailed_circuits/Saudi_Arabia.avif"
     },
     {
         "name": "Miami",
@@ -62,8 +62,8 @@
         "firstGP": 2022,
         "flag": "🇺🇸",
         "driverLapRecordHolder": "Max Verstappen (2023)",
-        "src": "/outlined_circuits/United_States.avif",
-        "url": "/detailed_circuits/United_States.png"
+        "src": "/outlined_circuits/Miami.png",
+        "url": "/detailed_circuits/Miami.avif"
     },
     {
         "name": "Imola",
@@ -73,8 +73,8 @@
         "firstGP": 1980,
         "flag": "🇮🇹",
         "driverLapRecordHolder": "Valtteri Bottas (2020)",
-        "src": "/outlined_circuits/Italy.avif",
-        "url": "/detailed_circuits/Italy.png"
+        "src": "/outlined_circuits/Emilia_Romagna.png",
+        "url": "/detailed_circuits/Emilia_Romagna.avif"
     },
     {
         "name": "Monaco",
@@ -85,7 +85,7 @@
         "flag": "🇲🇨",
         "driverLapRecordHolder": "Lewis Hamilton (2019)",
         "src": "/outlined_circuits/Monaco.avif",
-        "url": "/detailed_circuits/Monaco.png"
+        "url": "/detailed_circuits/Monaco.avif"
     },
     {
         "name": "Barcelona",
@@ -96,7 +96,7 @@
         "flag": "🇪🇸",
         "driverLapRecordHolder": "Lando Norris (2024)",
         "src": "/outlined_circuits/Spain.avif",
-        "url": "/detailed_circuits/Spain.png"
+        "url": "/detailed_circuits/Spain.avif"
     },
     {
         "name": "Montreal",
@@ -107,7 +107,7 @@
         "flag": "🇨🇦",
         "driverLapRecordHolder": "Sebastian Vettel (2019)",
         "src": "/outlined_circuits/Canada.avif",
-        "url": "/detailed_circuits/Canada.png"
+        "url": "/detailed_circuits/Canada.avif"
     },
     {
         "name": "Spielberg",
@@ -129,7 +129,7 @@
         "flag": "🇬🇧",
         "driverLapRecordHolder": "Lewis Hamilton (2020)",
         "src": "/outlined_circuits/Silverstone.avif",
-        "url": "/detailed_circuits/Silverstone.png"
+        "url": "/detailed_circuits/Great_Britain.avif"
     },
     {
         "name": "Spa",
@@ -151,7 +151,7 @@
         "flag": "🇭🇺",
         "driverLapRecordHolder": "Lewis Hamilton (2020)",
         "src": "/outlined_circuits/Hungary.avif",
-        "url": "/detailed_circuits/Hungary.png"
+        "url": "/detailed_circuits/Hungary.avif"
     },
     {
         "name": "Zandvoort",
@@ -162,7 +162,7 @@
         "flag": "🇳🇱",
         "driverLapRecordHolder": "Max Verstappen (2021)",
         "src": "/outlined_circuits/Netherlands.avif",
-        "url": "/detailed_circuits/Netherlands.png"
+        "url": "/detailed_circuits/Netherlands.avif"
     },
     {
         "name": "Monza",
@@ -173,7 +173,7 @@
         "flag": "🇮🇹",
         "driverLapRecordHolder": "Lewis Hamilton (2020)",
         "src": "/outlined_circuits/Italy.avif",
-        "url": "/detailed_circuits/Italy.png"
+        "url": "/detailed_circuits/Italy.avif"
     },
     {
         "name": "Baku",
@@ -184,7 +184,7 @@
         "flag": "🇦🇿",
         "driverLapRecordHolder": "Charles Leclerc (2023)",
         "src": "/outlined_circuits/Azerbaijan.avif",
-        "url": "/detailed_circuits/Azerbaijan.png"
+        "url": "/detailed_circuits/Baku.avif"
     },
     {
         "name": "Singapore",
@@ -195,7 +195,7 @@
         "flag": "🇸🇬",
         "driverLapRecordHolder": "Lando Norris (2024)",
         "src": "/outlined_circuits/Singapore.avif",
-        "url": "/detailed_circuits/Singapore.png"
+        "url": "/detailed_circuits/Singapore.avif"
     },
     {
         "name": "Austin",
@@ -206,7 +206,7 @@
         "flag": "🇺🇸",
         "driverLapRecordHolder": "Valtteri Bottas (2019)",
         "src": "/outlined_circuits/United_States.avif",
-        "url": "/detailed_circuits/United_States.png"
+        "url": "/detailed_circuits/USA.avif"
     },
     {
         "name": "Mexico City",
@@ -228,7 +228,7 @@
         "flag": "🇧🇷",
         "driverLapRecordHolder": "Lewis Hamilton (2018)",
         "src": "/outlined_circuits/Brazil.avif",
-        "url": "/detailed_circuits/Brazil.png"
+        "url": "/detailed_circuits/Brazil.avif"
     },
     {
         "name": "Las Vegas",
@@ -239,7 +239,7 @@
         "flag": "🇺🇸",
         "driverLapRecordHolder": "Charles Leclerc (2025)",
         "src": "/outlined_circuits/United_States.avif",
-        "url": "/detailed_circuits/United_States.png"
+        "url": "/detailed_circuits/USA.avif"
     },
     {
         "name": "Lusail",
@@ -250,7 +250,7 @@
         "flag": "🇶🇦",
         "driverLapRecordHolder": "Max Verstappen (2024)",
         "src": "/outlined_circuits/Qatar.avif",
-        "url": "/detailed_circuits/Qatar.png"
+        "url": "/detailed_circuits/Qatar.avif"
     },
     {
         "name": "Abu Dhabi",

@@ -17,4 +17,23 @@
 
 body{
   font-family: "Formula1 Display Regular";
+  background-color: #101828;
+}
+
+/* globals.css */
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
 }

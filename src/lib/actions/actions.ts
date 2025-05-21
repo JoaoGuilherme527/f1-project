@@ -8,7 +8,7 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = 'Content-Type, A
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 export async function GetSessionKey(year: number): Promise<number> {
-    const res = await axios.get(`/sessions?year=${year}`)
+    const res = await axios.get(`/sessions?year=${2025}`)
     const sessionKeyArray = res.data
     const data = sessionKeyArray[sessionKeyArray.length - 1]
     return data.session_key
@@ -16,10 +16,10 @@ export async function GetSessionKey(year: number): Promise<number> {
 
 export async function GetDrivers(key: string | undefined, year: number): Promise<Array<Driver> | Error> {
     try {
-        const sessionKey = key ? Number(key) : Number(await GetSessionKey(year))
+        // const sessionKey = key ? Number(key) : Number(await GetSessionKey(year))
         const res = await fetch("http://localhost:3000/drivers.json")
         const data = await res.json();
-        const driversFiltered = data.filter(({ session_key }: Driver) => session_key === sessionKey)
+        const driversFiltered = data.slice(-20)
         return driversFiltered
     } catch (error) {
         console.log(error);

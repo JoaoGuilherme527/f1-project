@@ -1,0 +1,63 @@
+.hiddenSideBar {
+    transition: all 0.3s ease-out;
+    width: 3.5rem;
+    overflow-x: hidden;
+}
+
+.showSideBar {
+    transition: all 0.3s ease-out;
+    width: 14rem;
+    overflow-x: hidden;
+}
+.hiddenSideBarMobile {
+    transition: all 0.3s ease-out;
+    height: 3.5rem;
+    overflow-y: hidden;
+}
+
+.showSideBarMobile {
+    transition: all 0.3s ease-out;
+    height: 14.5rem;
+    overflow-y: hidden;
+}
+
+.activeRoute::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 6px;
+    width: 0%;
+    bottom: -10px;
+    border-radius: 10px;
+    background-color: #fb2c36;
+    animation: routeAnimation 0.3s ease-out forwards;
+}
+
+.activeRoute::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #fb2c36;
+    border-radius: 6px;
+    z-index: 2;
+    animation: afterAnimation 0.3s ease-out forwards;
+}
+
+@keyframes routeAnimation {
+    100% {
+        width: 60%;
+    }
+}
+
+@keyframes afterAnimation {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+    100% {
+        width: 100%;
+        left: 0;
+        transform: translateX(0);
+    }
+}

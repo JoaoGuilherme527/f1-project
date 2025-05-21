@@ -1,0 +1,450 @@
+.false {
+    transition: all 0.3s ease-in-out;
+    animation: close 0.3s forwards;
+    overflow: hidden;
+
+    #img {
+        animation: imgChangeFalse 0.6s forwards;
+    }
+    #flag {
+        animation: flagAnimationFalse 0.3s forwards;
+    }
+    #country {
+        animation: countryAnimationFalse 0.3s forwards;
+    }
+    #circuit {
+        animation: circuitAnimationFalse 0.3s forwards;
+    }
+    #circuitInfos {
+        animation: infosChangeFalse 0.3s forwards;
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.true {
+    transition: all 0.3s ease-in-out;
+    animation: open 0.3s forwards;
+    overflow: hidden;
+
+    #img {
+        animation: imgChangeTrue 0.6s forwards;
+    }
+    #flag {
+        animation: flagAnimationTrue 0.3s forwards;
+    }
+    #country {
+        animation: countryAnimationTrue 0.3s forwards;
+    }
+    #circuit {
+        animation: circuitAnimationTrue 0.3s forwards;
+    }
+    #circuitInfos {
+        animation: infosChangeTrue 0.3s forwards;
+    }
+}
+
+@keyframes open {
+    from {
+        height: 10vh;
+    }
+    to {
+        height: 60vh;
+        box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+@keyframes close {
+    from {
+        height: 60vh;
+        box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+    }
+    to {
+        height: 10vh;
+    }
+}
+
+@keyframes imgChangeTrue {
+    0% {
+        opacity: 30%;
+        position: absolute;
+        right: 1vw;
+        top: 1.2vw;
+    }
+    20% {
+        right: -100%;
+        top: 30%;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+        position: absolute;
+        top: 30%;
+        right: 50%;
+        transform: translate(50%, -30%);
+        width: 40vw;
+    }
+}
+
+@keyframes imgChangeFalse {
+    0% {
+        position: absolute;
+        opacity: 0;
+        top: 30%;
+        right: 50%;
+        transform: translate(50%, -30%);
+        width: 40vw;
+        right: -100%;
+    }
+    30% {
+        opacity: 0.5;
+        top: 30%;
+        right: -100%;
+        width: 20vw;
+    }
+    60% {
+        top: 1.2vw;
+        right: 1vw;
+        width: 90px;
+    }
+    100% {
+        opacity: 30%;
+        position: absolute;
+        right: 1vw;
+        top: 1.2vw;
+    }
+}
+
+@keyframes flagAnimationTrue {
+    from {
+        position: absolute;
+        top: 3vw;
+        left: 2vw;
+    }
+    to {
+        position: absolute;
+        top: 3vw;
+        left: 10%;
+        transform: translateX(-10%);
+        scale: 1.5;
+    }
+}
+
+@keyframes flagAnimationFalse {
+    from {
+        position: absolute;
+        top: 3vw;
+        left: 10%;
+        transform: translateX(-10%);
+        scale: 1.5;
+    }
+    to {
+        position: absolute;
+        top: 3vw;
+        left: 2vw;
+    }
+}
+
+@keyframes countryAnimationFalse {
+    from {
+        position: absolute;
+        top: 2vw;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: white;
+        font-weight: 700;
+    }
+    to {
+        position: absolute;
+        top: 4.5vw;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes countryAnimationTrue {
+    from {
+        position: absolute;
+        top: 4.5vw;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    to {
+        position: absolute;
+        top: 3vw;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: white;
+        font-weight: 700;
+        width: 100%;
+    }
+}
+
+@keyframes circuitAnimationFalse {
+    from {
+        position: absolute;
+        top: 68%;
+        left: 10%;
+        transform: translate(-10%, -52%);
+        font-size: 1.75rem;
+        color: white;
+        font-weight: 700;
+    }
+    to {
+        position: absolute;
+        top: 2vw;
+        font-size: 1.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes circuitAnimationTrue {
+    from {
+        position: absolute;
+        top: 2vw;
+        font-size: 1.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    to {
+        position: absolute;
+        top: 68%;
+        left: 10%;
+        transform: translate(-10%, -52%);
+        font-size: 1.5rem;
+        color: #ffffff;
+        font-weight: 700;
+    }
+}
+
+@keyframes infosChangeFalse {
+    from {
+        position: absolute;
+        bottom: 5%;
+        right: 7%;
+        left: 7%;
+    }
+    to {
+        position: absolute;
+        top: 100%;
+        left: 7%;
+        right: 7%;
+    }
+}
+
+@keyframes infosChangeTrue {
+    from {
+        position: absolute;
+        top: 100%;
+        left: 7%;
+        right: 7%;
+    }
+    to {
+        position: absolute;
+        bottom: 5%;
+        left: 7%;
+        right: 7%;
+    }
+}
+
+/* MEDIA QUERIES PARA MOBILE */
+
+@media (max-width: 768px) {
+    .true {
+        #img {
+            animation: imgChangeTrueMobile 0.6s forwards;
+        }
+        #flag {
+            animation: flagAnimationTrueMobile 0.3s forwards;
+        }
+        #country {
+            animation: countryAnimationTrueMobile 0.3s forwards;
+        }
+        #circuit {
+            animation: circuitAnimationTrueMobile 0.3s forwards;
+        }
+    }
+
+    .false {
+        #img {
+            animation: imgChangeFalseMobile 0.6s forwards;
+        }
+        #flag {
+            animation: flagAnimationFalseMobile 0.3s forwards;
+        }
+        #country {
+            animation: countryAnimationFalseMobile 0.3s forwards;
+        }
+        #circuit {
+            animation: circuitAnimationFalseMobile 0.3s forwards;
+        }
+    }
+
+    @keyframes circuitAnimationFalseMobile {
+        from {
+            position: absolute;
+            top: 65%;
+            left: 10%;
+            transform: translate(-10%, -65%);
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+        to {
+            position: absolute;
+            top: 6vw;
+            font-size: 1.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes circuitAnimationTrueMobile {
+        from {
+            position: absolute;
+            top: 4vw;
+            font-size: 1.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        to {
+            position: absolute;
+            top: 65%;
+            left: 10%;
+            transform: translate(-10%, -65%);
+            font-size: 1.75rem;
+            color: white;
+            font-weight: 700;
+        }
+    }
+
+    @keyframes countryAnimationFalseMobile {
+        from {
+            position: absolute;
+            top: 5.5vw;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+        to {
+            position: absolute;
+            top: 12vw;
+            left: 50%;
+            font-size: 0.9rem;
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes countryAnimationTrueMobile {
+        from {
+            position: absolute;
+            top: 12vw;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+        }
+        to {
+            position: absolute;
+            top: 5.5vw;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.3rem;
+            color: white;
+            font-weight: 700;
+            width: 100%;
+        }
+    }
+
+    @keyframes flagAnimationTrueMobile {
+        from {
+            position: absolute;
+            top: 7vw;
+            left: 7vw;
+            scale: 1.5;
+        }
+        to {
+            position: absolute;
+            top: 5vw;
+            left: 7%;
+            transform: translateX(-8%);
+            scale: 1.3;
+        }
+    }
+
+    @keyframes flagAnimationFalseMobile {
+        from {
+            position: absolute;
+            top: 5vw;
+            left: 8%;
+            transform: translateX(-8%);
+            scale: 1.5;
+        }
+        to {
+            position: absolute;
+            top: 7vw;
+            left: 7vw;
+            scale: 1.5;
+        }
+    }
+
+    @keyframes imgChangeTrueMobile {
+        0% {
+            opacity: 30%;
+            position: absolute;
+            right: 1.5vw;
+            top: 2vw;
+        }
+        20% {
+            right: -100%;
+            top: 25%;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            position: absolute;
+            top: 25%;
+            right: 50%;
+            transform: translate(50%, -30%);
+            width: 80vw;
+        }
+    }
+
+    @keyframes imgChangeFalseMobile {
+        0% {
+            position: absolute;
+            opacity: 0;
+            top: 25%;
+            right: 50%;
+            transform: translate(50%, -30%);
+            width: 80vw;
+            right: -100%;
+        }
+        30% {
+            opacity: 0.5;
+            top: 25%;
+            right: -100%;
+        }
+        60% {
+            right: 1.5vw;
+            top: 2vw;
+            width: 20vw;
+        }
+        100% {
+            opacity: 30%;
+            position: absolute;
+            right: 1.5vw;
+            top: 2vw;
+        }
+    }
+}

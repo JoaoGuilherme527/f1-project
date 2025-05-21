@@ -4,27 +4,92 @@ import {GetCircuits} from "@/lib/actions/actions"
 import {Circuit} from "@/types/Circuits"
 import Image from "next/image"
 import {useEffect, useState, useTransition} from "react"
+import {motion} from "framer-motion"
+import "./style.css"
 
-function CircuitComponent({circuit}: {circuit: Circuit}) {
+interface CircuitComponentProps {
+    circuit: Circuit
+    isOpen: string
+    setIsOpen: (isOpen: string) => void
+}
+
+interface CircuitsComponentProps {
+    circuits: Array<Circuit>
+    isOpen: string
+    setIsOpen: (isOpen: string) => void
+}
+
+function CircuitComponent({circuit, isOpen, setIsOpen}: CircuitComponentProps) {
+    const [isOpenCircuit, setIsOpenCircuit] = useState(false)
+    function checkIsOpen() {
+        setIsOpenCircuit(isOpen === circuit.name)
+    }
+
+    useEffect(() => checkIsOpen(), [isOpen])
+
     return (
-        <div className="relative bg-[#1e293960] flex items-center justify-between gap-6 px-4 py-2 min-w-[350px] max-w-full rounded-md border border-gray-800">
-                <div className="z-20">
-                    <p className="text-3xl">{circuit.flag}</p>
+        <motion.div
+            initial={{opacity: 0, scale: 0.95}}
+            animate={{opacity: 1, scale: 1}}
+            transition={{duration: 0.3}}
+            className={`relative bg-[#1e293960] flex items-center justify-between gap-6 px-4 py-2 min-w-[350px] max-w-full rounded-md border border-gray-800 cursor-pointer transition-all hover:bg-[#1e2939de] ${isOpenCircuit}`}
+            onClick={() => {
+                setIsOpen(isOpenCircuit ? "" : circuit.name)
+            }}
+        >
+            <div id="flag" className="z-20">
+                <p className="text-3xl">{circuit.flag}</p>
+            </div>
+            <div className="z-20 text-center">
+                <h2 id="circuit" className="text-white font-bold">
+                    {circuit.name}
+                </h2>
+                <p id="country" className="text-gray-400">
+                    {circuit.country}
+                </p>
+            </div>
+            <motion.div initial={{opacity: 0, scale: 0.8}} animate={{opacity: 1, scale: 1}} transition={{duration: 0.5}}>
+                <Image
+                    id="img"
+                    src={isOpenCircuit ? circuit.url : circuit.src}
+                    alt={circuit.name}
+                    width={890}
+                    height={590}
+                    className={`z-10 w-[90px] ${isOpenCircuit ? "" : "invert"}`}
+                />
+            </motion.div>
+            <div id="circuitInfos" className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200">
+                    <p className="text-sm text-white">First Grand Prix</p>
+                    <p className="text-3xl text-white" style={{fontFamily: "Formula1 Display Bold"}}>
+                        {circuit.firstGP}
+                    </p>
                 </div>
-                <div className="z-20 text-center">
-                    <h2 className="text-xl text-white font-bold">{circuit.name}</h2>
-                    <p className="text-gray-400">{circuit.country}</p>
+                <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200">
+                    <p className="text-sm text-white">Circuit Length</p>
+                    <p className="text-3xl text-white" style={{fontFamily: "Formula1 Display Bold"}}>
+                        {circuit.circuitLength}
+                    </p>
                 </div>
-            <Image src={circuit.src} alt={circuit.name} width={90} height={90} className="opacity-30 right-4 z-10 invert" />
-        </div>
+                <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200 col-span-2 pr-4">
+                    <p className="text-sm text-white">Lap Record</p>
+                    <div className="flex items-end gap-2">
+                        <p id={`circuit-${circuit.name}`} className="text-3xl text-white" style={{fontFamily: "Formula1 Display Bold"}}>
+                            {circuit.lapRecord}
+                        </p>
+                        <p className="text-md text-white">{circuit.driverLapRecordHolder}</p>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
     )
 }
 
-function CircuitsComponent({circuits}: {circuits: Circuit[]}) {
+function CircuitsComponent({circuits, isOpen, setIsOpen}: CircuitsComponentProps) {
     return (
         <div className="grid grid-cols-2 max-sm:grid-cols-1 gap-4 p-4 w-full max-w-full overflow-y-auto h-[calc(100vh-150px)]">
             {circuits.map((circuit, index) => (
-                <CircuitComponent key={index} circuit={circuit} />
+                <CircuitComponent key={index} circuit={circuit} isOpen={isOpen} setIsOpen={setIsOpen} />
             ))}
         </div>
     )
@@ -34,8 +99,12 @@ export default function CircuitsSearch() {
     const [isPending, startTransition] = useTransition()
     const [circuits, setCircuits] = useState<Array<Circuit>>([])
     const [searchTerm, setSearchTerm] = useState("")
-    const [isYear, setIsYear] = useState<number>(2025)
-    const filteredCircuits = circuits.filter((circuit) => circuit.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    const [isOpen, setIsOpen] = useState("")
+    const filteredCircuits = circuits.filter(
+        (circuit) =>
+            circuit.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            circuit.country.toLowerCase().includes(searchTerm.toLowerCase())
+    )
 
     useEffect(() => {
         getCircuits()
@@ -59,7 +128,7 @@ export default function CircuitsSearch() {
 
     return (
         <div className="flex flex-col py-4 gap-2 w-full h-screen">
-            <h1 className="px-10 text-4xl text-white font-bold" style={{fontFamily: "Formula1 Display Bold"}}>
+            <h1 className="px-10 text-4xl text-white font-bold max-sm:text-center" style={{fontFamily: "Formula1 Display Bold"}}>
                 Circuits
             </h1>
             <div className="flex flex-col gap-2 py-2 w-full h-full">
@@ -72,7 +141,7 @@ export default function CircuitsSearch() {
                     />
                 </div>
                 {isPending ? (
-                    <div className="absolute top-1/2 left-1/2 ">
+                    <div className="absolute top-1/2 left-1/2">
                         <div role="status">
                             <svg
                                 aria-hidden="true"
@@ -93,17 +162,15 @@ export default function CircuitsSearch() {
                             <span className="sr-only">Loading...</span>
                         </div>
                     </div>
-                ) : searchTerm.length > 0 ? (
-                    filteredCircuits.length > 0 ? (
-                        <CircuitsComponent circuits={filteredCircuits} />
-                    ) : (
-                        <p className="text-white text-center">No circuit found.</p>
-                    )
+                ) : searchTerm.length > 0 && filteredCircuits.length === 0 ? (
+                    <p className="text-yellow-500 text-center pt-2">No circuit found.</p>
+                ) : null}
+                {searchTerm.length > 0 && filteredCircuits.length > 0 ? (
+                    <CircuitsComponent circuits={filteredCircuits} isOpen={isOpen} setIsOpen={setIsOpen} />
                 ) : (
-                    <CircuitsComponent circuits={circuits} />
+                    <CircuitsComponent circuits={circuits} isOpen={isOpen} setIsOpen={setIsOpen} />
                 )}
             </div>
         </div>
     )
 }
-
