@@ -1,4 +1,4 @@
-export interface Circuit{
+interface Track{
     name: string
     country: string
     circuitLength: number

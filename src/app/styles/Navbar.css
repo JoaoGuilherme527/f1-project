@@ -1,6 +1,6 @@
 .hiddenSideBar {
     transition: all 0.3s ease-out;
-    width: 3.5rem;
+    width: 3.6rem;
     overflow-x: hidden;
 }
 
@@ -11,13 +11,13 @@
 }
 .hiddenSideBarMobile {
     transition: all 0.3s ease-out;
-    height: 3.5rem;
+    height: 3.7rem;
     overflow-y: hidden;
 }
 
 .showSideBarMobile {
     transition: all 0.3s ease-out;
-    height: 14.5rem;
+    height: 15rem;
     overflow-y: hidden;
 }
 

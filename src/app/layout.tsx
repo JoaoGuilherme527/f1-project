@@ -1,9 +1,9 @@
 import type {Metadata} from "next"
 import "./globals.css"
-import { Navbar } from "./_components/Navbar"
+import { Navbar } from "./components/Navbar"
 
 export const metadata: Metadata = {
-    title: "F1 Project",
+    title: "F1 Search",
 }
 
 export default function RootLayout({

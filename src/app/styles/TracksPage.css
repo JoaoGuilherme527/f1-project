@@ -48,21 +48,21 @@
 
 @keyframes open {
     from {
-        height: 10vh;
+        height: 100px;
     }
     to {
-        height: 60vh;
+        height: 800px;
         box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
     }
 }
 
 @keyframes close {
     from {
-        height: 60vh;
+        height: 800px;
         box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
     }
     to {
-        height: 10vh;
+        height: 100px;
     }
 }
 
@@ -71,7 +71,7 @@
         opacity: 30%;
         position: absolute;
         right: 1vw;
-        top: 1.2vw;
+        top: 1vh;
     }
     20% {
         right: -100%;
@@ -83,7 +83,7 @@
     100% {
         opacity: 1;
         position: absolute;
-        top: 30%;
+        top: 32%;
         right: 50%;
         transform: translate(50%, -30%);
         width: 40vw;
@@ -93,10 +93,8 @@
 @keyframes imgChangeFalse {
     0% {
         position: absolute;
-        opacity: 0;
-        top: 30%;
-        right: 50%;
-        transform: translate(50%, -30%);
+        top: 32%;
+        transform: translateY(-30%);
         width: 40vw;
         right: -100%;
     }
@@ -115,15 +113,16 @@
         opacity: 30%;
         position: absolute;
         right: 1vw;
-        top: 1.2vw;
+        top: 1vh;
     }
 }
 
 @keyframes flagAnimationTrue {
     from {
         position: absolute;
-        top: 3vw;
-        left: 2vw;
+        top: 3vh;
+        left: 1vw;
+        scale: 0.9;
     }
     to {
         position: absolute;
@@ -137,22 +136,23 @@
 @keyframes flagAnimationFalse {
     from {
         position: absolute;
-        top: 3vw;
+        top: 3vh;
         left: 10%;
         transform: translateX(-10%);
         scale: 1.5;
     }
     to {
         position: absolute;
-        top: 3vw;
-        left: 2vw;
+        top: 3vh;
+        left: 1vw;
+        scale: 0.9;
     }
 }
 
 @keyframes countryAnimationFalse {
     from {
         position: absolute;
-        top: 2vw;
+        top: 2vh;
         left: 50%;
         transform: translateX(-50%);
         font-size: 2rem;
@@ -161,7 +161,7 @@
     }
     to {
         position: absolute;
-        top: 4.5vw;
+        top: 6vh;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -170,13 +170,13 @@
 @keyframes countryAnimationTrue {
     from {
         position: absolute;
-        top: 4.5vw;
+        top: 6vh;
         left: 50%;
         transform: translateX(-50%);
     }
     to {
         position: absolute;
-        top: 3vw;
+        top: 2.5vw;
         left: 50%;
         transform: translateX(-50%);
         font-size: 2rem;
@@ -186,41 +186,70 @@
     }
 }
 
-@keyframes circuitAnimationFalse {
-    from {
-        position: absolute;
-        top: 68%;
-        left: 10%;
-        transform: translate(-10%, -52%);
-        font-size: 1.75rem;
-        color: white;
-        font-weight: 700;
-    }
-    to {
-        position: absolute;
-        top: 2vw;
-        font-size: 1.4rem;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
 @keyframes circuitAnimationTrue {
-    from {
+    0% {
         position: absolute;
         top: 2vw;
         font-size: 1.4rem;
         left: 50%;
         transform: translateX(-50%);
     }
-    to {
+    25% {
+        top: -100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    40% {
+        left: -100%;
+    }
+
+    50% {
+        top: 74%;
+    }
+
+    100% {
         position: absolute;
-        top: 68%;
+        top: 74%;
         left: 10%;
         transform: translate(-10%, -52%);
-        font-size: 1.5rem;
+        font-size: 2rem;
         color: #ffffff;
         font-weight: 700;
+    }
+}
+@keyframes circuitAnimationFalse {
+    0% {
+        position: absolute;
+        top: 74%;
+        left: 10%;
+        transform: translate(-10%, -52%);
+        font-size: 2rem;
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    50% {
+        top: 74%;
+    }
+
+    60% {
+        left: -100%;
+    }
+
+    75% {
+        top: -100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    100% {
+        position: absolute;
+        top: 2.2vh;
+        font-size: 1.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
     }
 }
 
@@ -258,6 +287,8 @@
 
 @media (max-width: 768px) {
     .true {
+        animation: openMobile 0.3s forwards;
+
         #img {
             animation: imgChangeTrueMobile 0.6s forwards;
         }
@@ -273,6 +304,8 @@
     }
 
     .false {
+        animation: closeMobile 0.3s forwards;
+
         #img {
             animation: imgChangeFalseMobile 0.6s forwards;
         }
@@ -287,34 +320,59 @@
         }
     }
 
-    @keyframes circuitAnimationFalseMobile {
+    @keyframes openMobile {
         from {
-            position: absolute;
-            top: 65%;
-            left: 10%;
-            transform: translate(-10%, -65%);
-            font-size: 2rem;
-            color: white;
-            font-weight: 700;
+            height: 80px;
         }
         to {
-            position: absolute;
-            top: 6vw;
-            font-size: 1.1rem;
-            left: 50%;
-            transform: translateX(-50%);
+            height: 550px;
+            box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    @keyframes closeMobile {
+        from {
+            height: 550px;
+            box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+        }
+        to {
+            height: 80px;
         }
     }
 
     @keyframes circuitAnimationTrueMobile {
-        from {
+        0% {
             position: absolute;
-            top: 4vw;
-            font-size: 1.1rem;
+            top: 3.7vh;
+            font-size: 0.85rem;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
+        }
+        25% {
+            top: -100%;
             left: 50%;
             transform: translateX(-50%);
         }
-        to {
+        40% {
+            left: -100%;
+        }
+        50% {
+            top: 65%;
+        }
+        100% {
+            position: absolute;
+            top: 68%;
+            left: 15%;
+            transform: translate(-10%, -65%);
+            font-size: 1rem;
+            color: white;
+            font-weight: 700;
+        }
+    }
+
+    @keyframes circuitAnimationFalseMobile {
+        0% {
             position: absolute;
             top: 65%;
             left: 10%;
@@ -322,6 +380,25 @@
             font-size: 1.75rem;
             color: white;
             font-weight: 700;
+        }
+        50% {
+            top: 65%;
+        }
+        60% {
+            left: -100%;
+        }
+        75% {
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        100% {
+            position: absolute;
+            top: 3.7vh;
+            font-size: 0.85rem;
+            left: 50%;
+            width: 100%;
+            transform: translateX(-50%);
         }
     }
 
@@ -337,7 +414,7 @@
         }
         to {
             position: absolute;
-            top: 12vw;
+            top: 13.5vw;
             left: 50%;
             font-size: 0.9rem;
             transform: translateX(-50%);
@@ -347,7 +424,7 @@
     @keyframes countryAnimationTrueMobile {
         from {
             position: absolute;
-            top: 12vw;
+            top: 13.5vw;
             left: 50%;
             transform: translateX(-50%);
             font-size: 0.9rem;
@@ -367,9 +444,10 @@
     @keyframes flagAnimationTrueMobile {
         from {
             position: absolute;
-            top: 7vw;
-            left: 7vw;
-            scale: 1.5;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            scale: 0.7;
         }
         to {
             position: absolute;
@@ -390,9 +468,10 @@
         }
         to {
             position: absolute;
-            top: 7vw;
-            left: 7vw;
-            scale: 1.5;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            scale: 0.7;
         }
     }
 
