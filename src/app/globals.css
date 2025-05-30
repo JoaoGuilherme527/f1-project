@@ -1,39 +1,83 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Formula1 Display Regular";
-  src: url("../fonts/Formula1-Regular.otf") format("opentype");
+    font-family: "Formula1 Display Regular";
+    src: url("../fonts/Formula1-Regular.otf") format("opentype");
 }
 
 @font-face {
-  font-family: "Formula1 Display Bold";
-  src: url("../fonts/Formula1-Bold.otf") format("opentype");
+    font-family: "Formula1 Display Bold";
+    src: url("../fonts/Formula1-Bold.otf") format("opentype");
 }
 
 @font-face {
-  font-family: "Formula1 Display Wide";
-  src: url("../fonts/Formula1-Wide.otf") format("opentype");
+    font-family: "Formula1 Display Wide";
+    src: url("../fonts/Formula1-Wide.otf") format("opentype");
 }
 
-body{
-  font-family: "Formula1 Display Regular";
-  background-color: #101828;
+body {
+    font-family: "Formula1 Display Regular";
+    background-color: #101828;
 }
 
 /* globals.css */
 
 html {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 @media (max-width: 768px) {
-  html {
-    font-size: 14px;
-  }
+    html {
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
+    html {
+        font-size: 14px;
+    }
+}
+
+.bg-plusPattern64 {
+    background-image: url(/plus-x2.avif);
+    filter: invert(1);
+}
+
+.bg-\[length\:8px\] {
+    background-size: 8px;
+}
+
+section {
+    position: relative;
+    overflow: hidden;
+    perspective: 100px;
+    * {
+        z-index: 1;
+    }
+}
+
+section::before {
+    /* opacity: 0.8; */
+    content: "";
+    position: absolute;
+    top: -125%;
+    left: calc(100% - 50% - 14px);
+    transform: translateX(-50%) rotateX(45deg);
+    width: 24px;
+    height: 250%;
+    background: linear-gradient(#fb2c36 80%, #fb2c3650);
+    z-index: 0;
+}
+
+section::after {
+    /* opacity: 0.8; */
+    content: "";
+    position: absolute;
+    top: -125%;
+    right: calc(100% - 50% - 14px);
+    transform: translateX(50%) rotateX(45deg);
+    width: 24px;
+    height: 250%;
+    background: linear-gradient(#fb2c36 80%, #fb2c3650);
+    z-index: 0;
 }

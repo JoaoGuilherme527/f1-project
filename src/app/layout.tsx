@@ -1,9 +1,12 @@
 import type {Metadata} from "next"
 import "./globals.css"
-import { Navbar } from "./components/Navbar"
+import {Navbar} from "./components/Navbar"
 
 export const metadata: Metadata = {
     title: "F1 Search",
+    // icons: {
+    //     icon: [{url: "/icons/f1Image.svg"}],
+    // },
 }
 
 export default function RootLayout({

@@ -37,7 +37,7 @@ function TrackComponent({track, isOpen, setIsOpen}: TrackComponentProps) {
 
     return (
         <motion.div
-            className={`relative bg-[#1e293960] flex items-center justify-between gap-6 px-4 py-2 min-w-[350px] max-w-full rounded-md border border-gray-800 cursor-pointer transition-all hover:bg-[#1e2939de] ${isOpenCircuit}`}
+            className={`relative bg-[#1e293960] flex items-center justify-between gap-6 px-4 py-2 max-w-full rounded-md border border-gray-800 cursor-pointer transition-all hover:bg-[#1e2939de] ${isOpenCircuit}`}
             onClick={() => {
                 setIsOpen(isOpenCircuit ? "" : track.name)
             }}
@@ -55,37 +55,46 @@ function TrackComponent({track, isOpen, setIsOpen}: TrackComponentProps) {
             </div>
             <motion.div>
                 {isOpenCircuit && (
-                    <Image
-                        id="img"
-                        src={track.url}
-                        alt={track.name}
-                        width={imgWidth}
-                        height={imgWidth * 0.75}
-                        loading="lazy"
-                        className={`z-10 w-[90px]`}
-                    />
+                    <div className="bg-gray-100">
+                        <Image
+                            id="img"
+                            src={track.url}
+                            alt={track.name}
+                            width={imgWidth}
+                            height={imgWidth * 0.75}
+                            loading="lazy"
+                            className={`z-10 w-[90px]`}
+                        />
+                    </div>
                 )}
             </motion.div>
-            <div id="circuitInfos" className="grid grid-cols-2 gap-3">
-                <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200">
-                    <p className="text-sm text-white">First Grand Prix</p>
-                    <p className="text-3xl text-white" style={{fontFamily: "Formula1 Display Bold"}}>
-                        {track.firstGP}
-                    </p>
-                </div>
-                <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200">
-                    <p className="text-sm text-white">Circuit Length</p>
-                    <p className="text-3xl text-white" style={{fontFamily: "Formula1 Display Bold"}}>
-                        {track.circuitLength}
-                    </p>
-                </div>
-                <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200 col-span-2 pr-4">
-                    <p className="text-sm text-white">Lap Record</p>
-                    <div className="flex items-end gap-2">
-                        <p id={`circuit-${track.name}`} className="text-3xl text-white" style={{fontFamily: "Formula1 Display Bold"}}>
-                            {track.lapRecord}
+            <div id="circuitInfos" className="flex flex-col gap-2">
+                <h2 className="text-white font-bold text-2xl">{track.name}</h2>
+                <div className="grid grid-cols-2 gap-3">
+                    <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200">
+                        <p className="text-sm text-white">First Grand Prix</p>
+                        <p className="text-3xl text-white font-extrabold" style={{fontFamily: "Formula1 Display Regular"}}>
+                            {track.firstGP}
                         </p>
-                        <p className="text-md text-white">{track.driverLapRecordHolder}</p>
+                    </div>
+                    <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200">
+                        <p className="text-sm text-white">Circuit Length</p>
+                        <p className="text-3xl text-white font-extrabold" style={{fontFamily: "Formula1 Display Regular"}}>
+                            {track.circuitLength / 1000} <span className="text-sm text-gray-300">meters</span>
+                        </p>
+                    </div>
+                    <div className="flex flex-col border-r-3 border-b-3 rounded-br-2xl border-gray-200 col-span-2 pr-4">
+                        <p className="text-sm text-white">Lap Record</p>
+                        <div className="flex items-end gap-2">
+                            <p
+                                id={`circuit-${track.name}`}
+                                className="text-3xl text-white font-extrabold"
+                                style={{fontFamily: "Formula1 Display Regular"}}
+                            >
+                                {track.lapRecord}
+                            </p>
+                            <p className="text-md text-white">{track.driverLapRecordHolder}</p>
+                        </div>
                     </div>
                 </div>
             </div>

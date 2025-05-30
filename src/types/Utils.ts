@@ -1,5 +1,4 @@
-
-export interface Meeting {
+interface Meeting {
     circuit_key: number;
     circuit_short_name: string;
     country_code: string;

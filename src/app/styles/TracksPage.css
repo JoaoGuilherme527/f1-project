@@ -13,7 +13,7 @@
         animation: countryAnimationFalse 0.3s forwards;
     }
     #circuit {
-        animation: circuitAnimationFalse 0.3s forwards;
+        animation: circuitAnimationFalse 0.5s forwards;
     }
     #circuitInfos {
         animation: infosChangeFalse 0.3s forwards;
@@ -39,7 +39,7 @@
         animation: countryAnimationTrue 0.3s forwards;
     }
     #circuit {
-        animation: circuitAnimationTrue 0.3s forwards;
+        animation: circuitAnimationTrue 0.5s forwards;
     }
     #circuitInfos {
         animation: infosChangeTrue 0.3s forwards;
@@ -52,6 +52,8 @@
     }
     to {
         height: 800px;
+        grid-row: span 7 / span 7;
+
         box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
     }
 }
@@ -59,6 +61,7 @@
 @keyframes close {
     from {
         height: 800px;
+        grid-row: span 7 / span 7;
         box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
     }
     to {
@@ -194,53 +197,26 @@
         left: 50%;
         transform: translateX(-50%);
     }
-    25% {
+    50% {
         top: -100%;
         left: 50%;
         transform: translateX(-50%);
+        opacity: 0;
     }
-
-    40% {
-        left: -100%;
-    }
-
-    50% {
-        top: 74%;
-    }
-
     100% {
-        position: absolute;
-        top: 74%;
-        left: 10%;
-        transform: translate(-10%, -52%);
-        font-size: 2rem;
-        color: #ffffff;
-        font-weight: 700;
+        opacity: 0;
     }
 }
 @keyframes circuitAnimationFalse {
     0% {
-        position: absolute;
-        top: 74%;
-        left: 10%;
-        transform: translate(-10%, -52%);
-        font-size: 2rem;
-        color: #ffffff;
-        font-weight: 700;
+        opacity: 0;
     }
 
     50% {
-        top: 74%;
-    }
-
-    60% {
-        left: -100%;
-    }
-
-    75% {
         top: -100%;
         left: 50%;
         transform: translateX(-50%);
+        opacity: 0;
     }
 
     100% {
@@ -349,48 +325,21 @@
             width: 100%;
             transform: translateX(-50%);
         }
-        25% {
-            top: -100%;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        40% {
-            left: -100%;
-        }
         50% {
-            top: 65%;
+            opacity: 0;
         }
+
         100% {
-            position: absolute;
-            top: 68%;
-            left: 15%;
-            transform: translate(-10%, -65%);
-            font-size: 1rem;
-            color: white;
-            font-weight: 700;
+            opacity: 0;
         }
     }
 
     @keyframes circuitAnimationFalseMobile {
         0% {
-            position: absolute;
-            top: 65%;
-            left: 10%;
-            transform: translate(-10%, -65%);
-            font-size: 1.75rem;
-            color: white;
-            font-weight: 700;
+            opacity: 0;
         }
         50% {
-            top: 65%;
-        }
-        60% {
-            left: -100%;
-        }
-        75% {
-            top: -100%;
-            left: 50%;
-            transform: translateX(-50%);
+            opacity: 0;
         }
         100% {
             position: absolute;
@@ -438,6 +387,7 @@
             color: white;
             font-weight: 700;
             width: 100%;
+            z-index: 20;
         }
     }
 
@@ -496,6 +446,7 @@
             right: 50%;
             transform: translate(50%, -30%);
             width: 80vw;
+            z-index: 10;
         }
     }
 

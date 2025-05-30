@@ -2,11 +2,15 @@
 
 import {useState} from "react"
 import {Icon} from "../../../public/icons/icons"
+import Image from "next/image"
 
-function PilotComponent({pilot}: {pilot: Pilot}) {
+function PilotComponent({pilot, teams}: {pilot: Pilot; teams: Array<Team>}) {
     const color = "#" + pilot.team_colour
+    const indexFromPilotTeam = teams.filter(({name}) => pilot.team_name.toLowerCase().includes(name.toLowerCase()))
+    const team = indexFromPilotTeam[0]
     return (
-        <div className="flex items-center justify-between relative border border-gray-800 shadow-2xl rounded-sm px-4 bg-[#1e293960] max-h-40">
+        // <div className="flex items-center justify-between relative border border-gray-800 shadow-2xl rounded-sm px-4 bg-[#1e293960] max-h-40">
+        <div className={`flex bg-[#1e293960] items-center justify-between relative border border-gray-800 shadow-2xl rounded-sm px-6 max-w-full`}>
             <div className="flex items-center gap-4">
                 {/* {driver.headshot_url && (
                     <Image
@@ -19,15 +23,16 @@ function PilotComponent({pilot}: {pilot: Pilot}) {
                 )} */}
 
                 <div className="z-20 flex flex-col justify-center py-2">
-                    <h2 className={`text-white text-md font-bold px-2 wrap-break-word`} >
-                        {pilot.full_name.split(" ")[0] ?? ""}
-                    </h2>
-                    <h3 className={`text-2xl px-2 wrap-break-word`} style={{color: color,fontFamily: "Formula1 Display Bold"}}>
+                    <h2 className={`text-white text-md font-bold wrap-break-word`}>{pilot.full_name.split(" ")[0] ?? ""}</h2>
+                    <h3 className={`text-2xl wrap-break-word`} style={{color: color, fontFamily: "Formula1 Display Bold"}}>
                         {pilot.full_name.split(" ")[1] ?? ""}
                     </h3>
-                    <p className="text-white text-md px-2">
-                        {pilot.team_name ?? ""}
-                    </p>
+                    <div className="flex items-center gap-2">
+                        <div className="w-[30px]">
+                            <Image alt="Team Logo" src={team?.logo} height={96} width={96} />
+                        </div>
+                        <p className="text-white text-md px-2">{pilot.team_name ?? ""}</p>
+                    </div>
                 </div>
             </div>
             <p className="opacity-20 text-5xl text-center" style={{color: color, fontFamily: "Formula1 Display Bold"}}>
@@ -37,18 +42,20 @@ function PilotComponent({pilot}: {pilot: Pilot}) {
     )
 }
 
-function PilotsComponent({pilots}: {pilots: Array<Pilot>}) {
+function PilotsComponent({pilots, teams}: {pilots: Array<Pilot>; teams: Array<Team>}) {
     const [page, setPage] = useState(1)
     const itemsPerPage = 8
 
     const paginatedTracks = pilots.slice(0, page * itemsPerPage)
 
     return (
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 min-md:grid-rows-5 p-4 w-full max-w-full overflow-y-auto h-[calc(100vh-150px)]">
+        <div
+            className={`grid grid-cols-4 max-sm:grid-cols-1 gap-4 p-4 w-full max-w-full overflow-y-auto h-[calc(100vh-150px)] transition-all `}
+        >
             {paginatedTracks
                 .sort((a, b) => (a.team_name ? a.team_name.localeCompare(b.team_name) : 0))
                 .map((pilot) => (
-                    <PilotComponent key={pilot.driver_number} pilot={pilot} />
+                    <PilotComponent key={pilot.driver_number} pilot={pilot} teams={teams} />
                 ))}
             {paginatedTracks.length < pilots.length && (
                 <button
@@ -62,7 +69,7 @@ function PilotsComponent({pilots}: {pilots: Array<Pilot>}) {
     )
 }
 
-export default function PilotsPage({pilots}: {pilots: Array<Pilot>}) {
+export default function PilotsPage({pilots, teams}: {pilots: Array<Pilot>; teams: Array<Team>}) {
     const [searchTerm, setSearchTerm] = useState("")
     const filteredDrivers = pilots.filter((pilot) => pilot.full_name.toLowerCase().includes(searchTerm.toLowerCase()))
 
@@ -129,12 +136,11 @@ export default function PilotsPage({pilots}: {pilots: Array<Pilot>}) {
                 ) : searchTerm.length > 0 && filteredDrivers.length === 0 ? (
                     <p className="text-white text-center pt-2">No pilot found.</p>
                 ) : searchTerm.length > 0 && filteredDrivers.length > 0 ? (
-                    <PilotsComponent pilots={filteredDrivers} />
+                    <PilotsComponent pilots={filteredDrivers} teams={teams} />
                 ) : (
-                    <PilotsComponent pilots={pilots} />
+                    <PilotsComponent pilots={pilots} teams={teams} />
                 )}
             </div>
         </div>
     )
 }
-

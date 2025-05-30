@@ -70,7 +70,7 @@ export function Navbar({
     }
 
     return (
-        <div className="flex max-sm:flex-col flex-row  min-lg:h-screen">
+        <div className={`flex max-sm:flex-col flex-row  min-lg:h-screen ${pathname.includes("tracks") || pathname.includes("pilots") ? 'bg-gray-950' : 'bg-gray-950'} px-1`}>
             {/* SIDEBAR */}
             <div
                 className={`bg-gray-50 w-56 p-2 px-3 shadow-2xl flex flex-col gap-8 items-center rounded-md z-10 showSideBar max-sm:hidden`}
@@ -103,7 +103,7 @@ export function Navbar({
 
             {/* SIDEBAR MOBILE */}
             <div
-                className={`bg-gray-100 w-full h-58 p-2 px-3 pb-4 shadow-2xl flex flex-col gap-8 items-center rounded-md z-10 min-sm:hidden hiddenSideBarMobile`}
+                className={`bg-gray-50 w-full h-58 p-2 px-3 pb-4 flex flex-col gap-8 items-center rounded-md z-10 min-sm:hidden mt-2 hiddenSideBarMobile shadow-2xl`}
                 id="sidebarMobile"
             >
                 {/* F1 IMAGE AND SANDWICH BUTTON */}
