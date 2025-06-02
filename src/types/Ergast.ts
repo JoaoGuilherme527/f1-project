@@ -6,8 +6,8 @@ interface ErgastBaseResponse {
     limit: string;
     offset: string;
     total: string;
-    RaceTable?: RaceTable;
-    StandingsTable?: StandingsTable;
+    RaceTable: RaceTable;
+    StandingsTable: StandingsTable;
   };
 }
 
@@ -35,6 +35,8 @@ interface Session {
   date: string;
   time?: string;
 }
+
+type SessionKey = 'FirstPractice' | 'SecondPractice' | 'ThirdPractice' | 'Qualifying' | 'Sprint';
 
 interface Circuit {
   circuitId: string;

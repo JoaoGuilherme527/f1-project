@@ -61,11 +61,20 @@ export async function GetTeams(name?: string): Promise<Array<Team>> {
     return name ? teams.filter((team) => team.name === name) : teams
 }
 
-export async function GetErgastRaces():Promise<Race[] | undefined>{
+export async function GetErgastRaces():Promise<Race[]>{
     const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/races/?format=json")
     const data: ErgastResponse = await res.json()
-    return data.MRData.RaceTable?.Races
-
+    return data.MRData.RaceTable.Races
 }
+
+export async function GetErgastDriverStandingList():Promise<StandingsTable>{
+    const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/driverstandings/?format=json")
+    const data: ErgastResponse = await res.json()
+    return data.MRData.StandingsTable
+}
+
+
+
+
 
 

@@ -21,16 +21,48 @@ export function getNextMeeting(meetings: Meeting[]): Meeting | null {
     )
 }
 
+export const pad = (n: number) => n.toString().padStart(2, "0")
 
 export function formatTime(ms: number) {
     const totalSeconds = Math.floor(ms / 1000)
     const hours = Math.floor(totalSeconds / 3600)
     const minutes = Math.floor((totalSeconds % 3600) / 60)
     const seconds = totalSeconds % 60
-    const pad = (n: number) => n.toString().padStart(2, "0")
     return { hours: pad(hours), minutes: pad(minutes), seconds: pad(seconds) }
 }
 
 export const getWeekdayShort = (date: Date) => ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][date.getUTCDay()]
 export const getMonthShort = (date: Date) =>
     ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"][date.getUTCMonth()]
+
+
+export function offsetToEtcTimezone(offset: string): string {
+  const match = offset.match(/([+-])(\d{2}):(\d{2})/);
+
+  if (!match) {
+    throw new Error("Invalid GMT offset format");
+  }
+
+  const sign = match[1];
+  const hours = parseInt(match[2], 10);
+
+  const etcSign = sign === '+' ? '-' : '+';
+
+  return `Etc/GMT${etcSign}${hours}`;
+}
+
+export function getTimeInOffset(date: string, time: string | undefined, gmt_offset: string): string {
+  const isoString = `${date}T${time ?? '00:00:00'}`;
+  const dateObj = new Date(isoString);
+
+  const timeZone = offsetToEtcTimezone(gmt_offset);
+
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+
+  return formatter.format(dateObj);
+}

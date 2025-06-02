@@ -108,7 +108,7 @@ export function Navbar({
             >
                 {/* F1 IMAGE AND SANDWICH BUTTON */}
                 <div className="flex items-center gap-2 w-full flex-row-reverse">
-                    <div className="px-1">
+                    <div className="px-1 z-10">
                         <Menu
                             size={24}
                             color="black"
@@ -120,8 +120,8 @@ export function Navbar({
                             }}
                         />
                     </div>
-                    <div id="imgHolder" className="flex items-center justify-center">
-                        <Icon icon="f1" className="w-1/2 text-red-500" />
+                    <div id="imgHolder" className="mr-[-34px] z-0 flex w-full h-[38px] items-center justify-center ">
+                        <Icon icon="f1" className="h-full text-red-500" />
                     </div>
                 </div>
                 {/* NAVBAR */}
