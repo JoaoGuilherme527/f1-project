@@ -1,4 +1,4 @@
-import {GetCircuits, GetDrivers, GetTeams} from "@/lib/actions/actions"
+import {GetCircuits, GetDrivers, GetErgastDrivers, GetTeams} from "@/lib/actions/actions"
 import PilotsPage from "@/app/components/PilotsPage"
 import TracksPage from "@/app/components/TracksPage"
 
@@ -13,9 +13,9 @@ export default async function SearchTypePage({params, searchParams}: Props) {
     const {type} = await params
 
     if (type === "pilots") {
-        const pilots = await GetDrivers()
+        const drivers = await GetErgastDrivers()
         const teams = await GetTeams()
-        return <PilotsPage pilots={pilots as Array<Pilot>} teams={teams}/>
+        return <PilotsPage drivers={drivers as Array<DriverErgast>} teams={teams}/>
     } else if (type === "tracks") {
         const circuits = await GetCircuits()
         return <TracksPage tracks={circuits as Array<Track>} />

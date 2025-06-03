@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import {useEffect, useState} from "react"
-import {formatTime, getMonthShort, getTimeInOffset, getWeekdayShort, pad} from "@/lib/utils"
+import {formatTime, getContrastTextColor, getMonthShort, getTimeInOffset, getWeekdayShort, pad} from "@/lib/utils"
 import {getNameOfSession, sessionKeys} from "@/types/ErgastExport"
 
 interface HomePageProps {
@@ -10,10 +10,13 @@ interface HomePageProps {
     nextMeeting: Meeting | null
     track: Track
     timeLeft: number | null
-    driverStandingList: StandingsTable
+    driverStandingList: DriverStanding[]
+    teamStandingList: ConstructorStanding[]
+    teams: Team[]
+    drivers: Driver[]
 }
 
-export default function HomePage({driverStandingList, nextRace, nextMeeting, track, timeLeft}: HomePageProps) {
+export default function HomePage({driverStandingList, nextRace, nextMeeting, track, timeLeft, teams, teamStandingList}: HomePageProps) {
     const [timeMode, setTimeMode] = useState<"local" | "track">("local")
     const [isTimeLeft, setIsTimeLeft] = useState<number>(timeLeft ?? 0)
 
@@ -21,6 +24,28 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
     const firstPractice = nextRace.FirstPractice?.date + "T" + nextRace.FirstPractice?.time
 
     const Separator = ({axle}: {axle: "x" | "y"}) => <div className={`${axle === "x" ? "h-0.5 w-full" : "h-full w-0.5"} bg-gray-600`} />
+
+    const NextRaceSchedule = () =>
+        sessionKeys.map((key, index) => {
+            const session = nextRace[key]
+            if (!session) return null
+
+            const dateObj = new Date(`${session.date}T${session.time}`)
+            const displayTime =
+                timeMode === "local"
+                    ? `${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}`
+                    : getTimeInOffset(session.date, session.time, nextMeeting?.gmt_offset as string)
+
+            return (
+                <div key={index} className="grid grid-cols-3 w-full">
+                    <p className="text-white">{getNameOfSession(index)}</p>
+                    <p className="text-gray-500 text-center">{getWeekdayShort(dateObj)}</p>
+                    <div className="py-2 px-6 bg-gray-600 rounded-lg">
+                        <p className="text-white text-center">{displayTime}</p>
+                    </div>
+                </div>
+            )
+        })
 
     const NextRaceLayout = ({nextMeeting}: {nextMeeting: Meeting}) => {
         const firstDate = pad(new Date(firstPractice).getUTCDate())
@@ -59,8 +84,8 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
                     <Image
                         className="object-contain h-full "
                         alt={track?.name as string}
-                        height={130}
-                        width={200}
+                        height={112}
+                        width={136}
                         src={track?.src as string}
                     />
                 </div>
@@ -146,59 +171,144 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
                 </section>
             )}
             {nextMeeting && (
-                <div className="flex flex-col items-center p-4">
-                    <div className="flex items-start rounded-2xl gap-4 max-sm:flex-col">
+                <div className="flex items-start gap-4 p-4  max-sm:flex-col max-sm:pb-4">
+                    <div className="flex flex-col gap-4 w-full">
                         <NextRaceLayout nextMeeting={nextMeeting} />
-                        <div className="flex flex-col items-center gap-4 w-full">
-                            <Countdown />
-
-                            <div className="flex flex-col items-center w-full justify-between bg-gray-800 p-4 gap-6 rounded-lg">
-                                <div className="grid grid-cols-2 gap-4 bg-gray-800 w-full rounded-lg ">
-                                    <button
-                                        onClick={() => setTimeMode("local")}
-                                        className={`py-2 px-4 rounded-lg ${timeMode === "local" ? "bg-red-500" : "bg-gray-700"} text-white transition-all`}
-                                    >
-                                        MY TIME
-                                    </button>
-                                    <button
-                                        onClick={() => setTimeMode("track")}
-                                        className={`py-2 px-4 rounded-lg ${timeMode === "track" ? "bg-red-500" : "bg-gray-700"} text-white transition-all`}
-                                    >
-                                        TRACK TIME
-                                    </button>
+                        <Countdown />
+                    </div>
+                    <div className="flex flex-col items-center gap-4 w-full">
+                        <div className="flex flex-col items-center w-full justify-between bg-gray-800 p-4 gap-6 rounded-lg">
+                            <div className="grid grid-cols-2 gap-4 bg-gray-800 w-full rounded-lg ">
+                                <button
+                                    onClick={() => setTimeMode("local")}
+                                    className={`py-2 px-4 rounded-lg ${
+                                        timeMode === "local" ? "bg-red-500" : "bg-gray-700"
+                                    } text-white transition-all`}
+                                >
+                                    MY TIME
+                                </button>
+                                <button
+                                    onClick={() => setTimeMode("track")}
+                                    className={`py-2 px-4 rounded-lg ${
+                                        timeMode === "track" ? "bg-red-500" : "bg-gray-700"
+                                    } text-white transition-all`}
+                                >
+                                    TRACK TIME
+                                </button>
+                            </div>
+                            <Separator axle="x" />
+                            <NextRaceSchedule />
+                            <Separator axle="x" />
+                            <div className="grid grid-cols-3 w-full">
+                                <p className="text-white">RACE</p>
+                                <p className="text-gray-500 text-center">{getWeekdayShort(new Date(race))}</p>
+                                <div className="py-2 px-6 bg-gray-600 rounded-lg">
+                                    <p className="text-white text-center">
+                                        {pad(new Date(race).getHours())}:{pad(new Date(race).getMinutes())}
+                                    </p>
                                 </div>
-                                <Separator axle="x" />
-                                {sessionKeys.map((key, index) => {
-                                    const session = nextRace[key]
-                                    if (!session) return null
-
-                                    const dateObj = new Date(`${session.date}T${session.time}`)
-                                    const displayTime =
-                                        timeMode === "local"
-                                            ? `${pad(dateObj.getHours())}:${pad(dateObj.getMinutes())}`
-                                            : getTimeInOffset(session.date, session.time, nextMeeting?.gmt_offset as string)
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center w-full border-2 border-gray-600 rounded-lg">
+                        <h2 className=" py-4 text-3xl font-semibold mask-b-from-5 text-gray-50 text-center w-full">Driver Standings</h2>
+                        <div className="flex flex-col items-center w-full border-t-2 border-gray-600">
+                            {driverStandingList
+                                .sort((a, b) => Number(a.position) - Number(b.position))
+                                .map(({position, points, Driver}, index) => {
+                                    let teamName = ""
+                                    for (let team of teams) {
+                                        for (let pilot of team.pilots) {
+                                            if (pilot.toLowerCase().includes(Driver.givenName.toLowerCase())) {
+                                                teamName = team.name
+                                            }
+                                        }
+                                    }
+                                    const filteredTeam = teams.filter(({name}) => name === teamName)[0]
+                                    const color = filteredTeam.color as string
+                                    const contrastColor = getContrastTextColor(color)
 
                                     return (
-                                        <div key={index} className="grid grid-cols-3 w-full">
-                                            <p className="text-white">{getNameOfSession(index)}</p>
-                                            <p className="text-gray-500 text-center">{getWeekdayShort(dateObj)}</p>
-                                            <div className="py-2 px-6 bg-gray-600 rounded-lg">
-                                                <p className="text-white text-center">{displayTime}</p>
+                                        <div
+                                            key={index}
+                                            className="w-full flex items-center border-b-2 border-gray-600 text-white"
+                                            // style={{background: color}}
+                                        >
+                                            <div className="w-14 py-2 border-r-2 border-gray-600">
+                                                <h1 className="text-center text-sm">{position}</h1>
+                                            </div>
+                                            <div className="flex items-center gap-2 w-full">
+                                                <div className="w-[48px] flex justify-center items-center">
+                                                    <Image alt="Team Logo" src={filteredTeam.logo} height={36} width={22} />
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <p className="text-sm">{Driver.givenName}</p>
+                                                    <p
+                                                        className="text-shadow text-md"
+                                                        style={{
+                                                            fontFamily: "Formula1 Display Bold",
+                                                        }}
+                                                    >
+                                                        {Driver.familyName.toUpperCase()}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="bg-gray-800 w-14 py-2">
+                                                <h1
+                                                    style={{fontFamily: "Formula1 Display Bold"}}
+                                                    className="text-center text-white text-sm"
+                                                >
+                                                    {points}
+                                                </h1>
                                             </div>
                                         </div>
                                     )
                                 })}
-                                <Separator axle="x" />
-                                <div className="grid grid-cols-3 w-full">
-                                    <p className="text-white">RACE</p>
-                                    <p className="text-gray-500 text-center">{getWeekdayShort(new Date(race))}</p>
-                                    <div className="py-2 px-6 bg-gray-600 rounded-lg">
-                                        <p className="text-white text-center">
-                                            {pad(new Date(race).getHours())}:{pad(new Date(race).getMinutes())}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center w-full border-2 border-gray-600 rounded-lg">
+                        <h2 className=" py-4 text-3xl font-semibold mask-b-from-5 text-gray-50 text-center w-full">Team Standings</h2>
+                        <div className="flex flex-col items-center w-full border-t-2 border-gray-600">
+                            {teamStandingList
+                                .sort((a, b) => Number(a.position) - Number(b.position))
+                                .map(({position, points, Constructor}, index) => {
+                                    const filteredTeam = teams.filter(({constructorId}) => constructorId === Constructor.constructorId)[0]
+
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="w-full flex items-center border-b-2 border-gray-600 text-white"
+                                            // style={{background: color}}
+                                        >
+                                            <div className="w-14 py-2 border-r-2 border-gray-600">
+                                                <h1 className="text-center text-sm">{position}</h1>
+                                            </div>
+                                            <div className="flex items-center gap-2 w-full">
+                                                <div className="w-[48px] flex justify-center items-center">
+                                                    <Image alt="Team Logo" src={filteredTeam.logo} height={36} width={22} />
+                                                </div>
+                                                <div className="flex items-center gap-1">
+                                                    <p
+                                                        className="text-shadow text-md"
+                                                        style={{
+                                                            fontFamily: "Formula1 Display Bold",
+                                                        }}
+                                                    >
+                                                        {filteredTeam.name.toUpperCase()}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className="bg-gray-800 w-14 py-2">
+                                                <h1
+                                                    style={{fontFamily: "Formula1 Display Bold"}}
+                                                    className="text-center text-white text-sm"
+                                                >
+                                                    {points}
+                                                </h1>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                         </div>
                     </div>
                 </div>

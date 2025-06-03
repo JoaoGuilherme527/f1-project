@@ -110,7 +110,7 @@ function TracksComponent({tracks, isOpen, setIsOpen, className}: TracksComponent
 
     return (
         <div
-            className={`grid grid-cols-2 max-sm:grid-cols-1 gap-4 p-4 w-full max-w-full overflow-y-auto h-[calc(100vh-150px)] ${className} transition-all `}
+            className={`grid grid-cols-2 max-sm:grid-cols-1 gap-4 p-4 w-full max-w-full min-md:h-calc(100vh-235px) overflow-y-auto ${className} transition-all min-md:mb-6 `}
         >
             {paginatedTracks
                 // .sort((a, b) => (a.country ? a.country.localeCompare(b.country) : 0))
@@ -143,11 +143,11 @@ export default function TracksPage({tracks}: {tracks: Array<Track>}) {
     }, 500)
 
     return (
-        <div className="flex flex-col py-4 gap-2 w-full h-screen bg-gray-900">
+        <div className="flex flex-col py-4 gap-2 w-full min-md:h-screen bg-gray-950">
             <h1 className="px-10 text-4xl text-white font-bold max-sm:text-center" style={{fontFamily: "Formula1 Display Bold"}}>
                 Race Tracks
             </h1>
-            <div className="flex flex-col gap-2 py-2 w-full h-full">
+            <div className="flex flex-col gap-2 py-2 w-full min-md:h-full">
                 <div className="flex gap-2 px-4">
                     <input
                         className="w-full rounded bg-[#1e293960] p-2 border border-gray-800 text-white"
@@ -171,7 +171,7 @@ export default function TracksPage({tracks}: {tracks: Array<Track>}) {
                         <div
                             className={`${
                                 isLoading ? "opacity-100" : "opacity-0"
-                            } absolute top-1/2 left-1/2 translate-x-[-50%] -translate-y-[50%]`}
+                            } absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[50%]`}
                         >
                             <Icon icon="loading" className="w-30 h-30" />
                         </div>

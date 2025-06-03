@@ -1,6 +1,6 @@
 {
-  "name": "f1-search",
-  "description": "F1 Search is a web application that allows users to search for Formula 1 drivers, circuits, teams and rules",
+  "name": "grand-prix-nexus",
+  "description": "Grand Prix Nexus is a web application that allows users to search for Formula 1 drivers, circuits, teams and rules",
   "version": "0.1.0",
   "private": true,
   "scripts": {

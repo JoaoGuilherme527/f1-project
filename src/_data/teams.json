@@ -1,72 +1,82 @@
 [
-  {
-    "name": "McLaren",
-    "logo": "/logos/mclaren.png",
-    "color": "rgb(244, 118, 0)",
-    "pilots": ["Oscar PIASTRI", "Lando NORRIS"],
-    "car": "/cars/mclaren.png"
-  },
-  {
-    "name": "Mercedes",
-    "logo": "/logos/mercedes.png",
-    "color": "rgb(0, 210, 190)",
-    "pilots": ["George RUSSELL", "Andrea Kimi ANTONELLI"],
-    "car": "/cars/mercedes.png"
-  },
-  {
-    "name": "Red Bull Racing",
-    "logo": "/logos/red-bull.png",
-    "color": "rgb(71 129 215)",
-    "pilots": ["Max VERSTAPPEN", "Yuki TSUNODA"],
-    "car": "/cars/redbull.png"
-  },
-  {
-    "name": "Ferrari",
-    "logo": "/logos/ferrari.png",
-    "color": "rgb(220, 0, 0)",
-    "pilots": ["Charles LECLERC", "Lewis HAMILTON"],
-    "car": "/cars/ferrari.png"
-  },
-  {
-    "name": "Williams",
-    "logo": "/logos/williams.png",
-    "color": "rgb(24 104 219)",
-    "pilots": ["Alexander ALBON", "Carlos SAINZ"],
-    "car": "/cars/williams.png"
-  },
-  {
-    "name": "Haas",
-    "logo": "/logos/haas.png",
-    "color": "rgb(156 159 162)",
-    "pilots": ["Esteban OCON", "Oliver BEARMAN"],
-    "car": "/cars/haas.png"
-  },
-  {
-    "name": "Racing Bulls",
-    "logo": "/logos/racing-bulls.png",
-    "color": "rgb(108 152 255)",
-    "pilots": ["Liam LAWSON", "Isack HADJAR"],
-    "car": "/cars/racing-bulls.png"
-  },
-  {
-    "name": "Aston Martin",
-    "logo": "/logos/aston-martin.png",
-    "color": "rgb(0, 137, 63)",
-    "pilots": ["Lance STROLL", "Fernando ALONSO"],
-    "car": "/cars/aston-martin.png"
-  },
-  {
-    "name": "Alpine",
-    "logo": "/logos/alpine.png",
-    "color": "rgb(0, 144, 255)",
-    "pilots": ["Pierre GASLY", "Franco COLAPINTO"],
-    "car": "/cars/alpine.png"
-  },
-  {
-    "name": "Kick Sauber",
-    "logo": "/logos/kick-sauber.png",
-    "color": "rgb(0, 255, 0)",
-    "pilots": ["Nico HULKENBERG", "Gabriel BORTOLETO"],
-    "car": "/cars/kick-sauber.png"
-  }
+    {
+        "constructorId": "mclaren",
+        "name": "McLaren",
+        "logo": "/logos/mclaren.png",
+        "color": "#FF8000",
+        "pilots": ["Oscar PIASTRI", "Lando NORRIS"],
+        "car": "/cars/mclaren.png"
+    },
+    {
+        "constructorId": "mercedes",
+        "name": "Mercedes",
+        "logo": "/logos/mercedes.png",
+        "color": "rgb(0, 210, 190)",
+        "pilots": ["George RUSSELL", "Andrea Kimi ANTONELLI"],
+        "car": "/cars/mercedes.png"
+    },
+    {
+        "constructorId": "red_bull",
+        "name": "Red Bull Racing",
+        "logo": "/logos/red-bull.png",
+        "color": "#192c64",
+        "pilots": ["Max VERSTAPPEN", "Yuki TSUNODA"],
+        "car": "/cars/redbull.png"
+    },
+    {
+        "constructorId": "ferrari",
+        "name": "Ferrari",
+        "logo": "/logos/ferrari.png",
+        "color": "#F60000",
+        "pilots": ["Charles LECLERC", "Lewis HAMILTON"],
+        "car": "/cars/ferrari.png"
+    },
+    {
+        "constructorId": "williams",
+        "name": "Williams",
+        "logo": "/logos/williams.png",
+        "color": "#499BCC",
+        "pilots": ["Alexander ALBON", "Carlos SAINZ"],
+        "car": "/cars/williams.png"
+    },
+    {
+        "constructorId": "haas",
+        "name": "Haas",
+        "logo": "/logos/haas.png",
+        "color": "rgb(255, 255, 255)",
+        "pilots": ["Esteban OCON", "Oliver BEARMAN"],
+        "car": "/cars/haas.png"
+    },
+    {
+        "constructorId": "rb",
+        "name": "Racing Bulls",
+        "logo": "/logos/racing-bulls.png",
+        "color": "#0000FF",
+        "pilots": ["Liam LAWSON", "Isack HADJAR"],
+        "car": "/cars/racing-bulls.png"
+    },
+    {
+        "constructorId": "aston_martin",
+        "name": "Aston Martin",
+        "logo": "/logos/aston-martin.png",
+        "color": "rgb(0, 137, 63)",
+        "pilots": ["Lance STROLL", "Fernando ALONSO"],
+        "car": "/cars/aston-martin.png"
+    },
+    {
+        "constructorId": "alpine",
+        "name": "Alpine",
+        "logo": "/logos/alpine.png",
+        "color": "#005BA9",
+        "pilots": ["Pierre GASLY", "Franco COLAPINTO", "Jack DOOHAN"],
+        "car": "/cars/alpine.png"
+    },
+    {
+        "constructorId": "sauber",
+        "name": "Kick Sauber",
+        "logo": "/logos/kick-sauber.png",
+        "color": "rgb(0, 255, 0)",
+        "pilots": ["Nico HULKENBERG", "Gabriel BORTOLETO"],
+        "car": "/cars/kick-sauber.png"
+    }
 ]

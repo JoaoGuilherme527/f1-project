@@ -1,4 +1,4 @@
-interface Pilot {
+interface Driver {
     broadcast_name: string;
     country_code: string
     driver_number: number

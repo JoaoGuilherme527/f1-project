@@ -26,7 +26,7 @@ export async function GetSessionKey(): Promise<number> {
         const sessionKeyArray = res.data;
 
         if (Array.isArray(sessionKeyArray) && sessionKeyArray.length > 0) {
-            const session = sessionKeyArray[sessionKeyArray.length - 1]; // or 0 if you want first
+            const session = sessionKeyArray[sessionKeyArray.length - 1];
             return session.session_key;
         } else {
             throw new Error('No session data found');
@@ -42,15 +42,10 @@ export async function GetMeetings(): Promise<Meeting[]> {
     return meetings
 }
 
-export async function GetDrivers(): Promise<Array<Pilot> | Error> {
-    try {
-        const sessionKey = await GetSessionKey()
-        const res = await axios.get(`/drivers?session_key=${sessionKey}`)
-        return res.data
-    } catch (error) {
-        console.log(error);
-        throw error
-    }
+export async function GetDrivers(): Promise<Array<Driver>> {
+    const sessionKey = await GetSessionKey()
+    const res = await axios.get(`/drivers?session_key=${sessionKey}`)
+    return res.data
 }
 
 export async function GetCircuits(): Promise<Array<Track>> {
@@ -61,16 +56,30 @@ export async function GetTeams(name?: string): Promise<Array<Team>> {
     return name ? teams.filter((team) => team.name === name) : teams
 }
 
-export async function GetErgastRaces():Promise<Race[]>{
+export async function GetErgastRaces(): Promise<Race[]> {
     const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/races/?format=json")
     const data: ErgastResponse = await res.json()
     return data.MRData.RaceTable.Races
 }
 
-export async function GetErgastDriverStandingList():Promise<StandingsTable>{
+export async function GetErgastDrivers(): Promise<DriverErgast[]> {
+    const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/drivers/?format=json")
+    const data: ErgastResponse = await res.json()
+    return data.MRData.DriverTable.Drivers
+}
+
+export async function GetErgastDriverStandingList(): Promise<DriverStanding[]
+> {
     const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/driverstandings/?format=json")
     const data: ErgastResponse = await res.json()
-    return data.MRData.StandingsTable
+    return data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+}
+
+export async function GetErgastTeamStandingList(): Promise<ConstructorStanding[]
+> {
+    const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/constructorstandings/?format=json")
+    const data: ErgastResponse = await res.json()
+    return data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
 }
 
 

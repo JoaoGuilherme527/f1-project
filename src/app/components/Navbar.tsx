@@ -24,7 +24,7 @@ export function Navbar({
     const routes: Array<Route> = [
         {href: "/", name: "Home", iconName: "home"},
         {href: "/search/tracks", name: "Race tracks", iconName: "tracks"},
-        {href: "/search/pilots", name: "Pilots", iconName: "pilots"},
+        {href: "/search/pilots", name: "Drivers", iconName: "pilots"},
     ]
 
     function RouteComponent({route}: {route: Route}) {

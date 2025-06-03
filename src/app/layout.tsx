@@ -3,10 +3,10 @@ import "./globals.css"
 import {Navbar} from "./components/Navbar"
 
 export const metadata: Metadata = {
-    title: "F1 Search",
-    // icons: {
-    //     icon: [{url: "/icons/f1Image.svg"}],
-    // },
+    title: "Grand Prix Nexus",
+    icons: {
+        icon: [{url: "/icons/f1Image.svg"}],
+    },
 }
 
 export default function RootLayout({

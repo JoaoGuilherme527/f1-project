@@ -8,6 +8,7 @@ interface ErgastBaseResponse {
     total: string;
     RaceTable: RaceTable;
     StandingsTable: StandingsTable;
+    DriverTable: DriverTable;
   };
 }
 
@@ -54,29 +55,39 @@ interface Circuit {
 interface StandingsTable {
   season: string;
   round: string;
-  DriverStandings?: DriverStanding[];
-  ConstructorStandings?: ConstructorStanding[];
+  StandingsLists: StandingsList[];
+  ConstructorStandings: ConstructorStanding[];
+}
+
+interface DriverTable {
+  season: string;
+  Drivers: DriverErgast[]
+}
+
+interface StandingsList extends StandingsTable {
+  DriverStandings: DriverStanding[]
 }
 
 interface DriverStanding {
   position: string;
   points: string;
   wins: string;
-  Driver: Driver;
+  Driver: DriverErgast;
   Constructors: Constructor[];
 }
 
 interface ConstructorStanding {
   position: string;
+  positionText: string;
   points: string;
   wins: string;
   Constructor: Constructor;
 }
 
-interface Driver {
+interface DriverErgast {
   driverId: string;
   permanentNumber?: string;
-  code?: string;
+  code: string;
   url: string;
   givenName: string;
   familyName: string;

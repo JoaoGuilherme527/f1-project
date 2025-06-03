@@ -1,4 +1,5 @@
 interface Team {
+    constructorId: string
     name: string
     logo: string
     color: string
