@@ -20,8 +20,19 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
     const [timeMode, setTimeMode] = useState<"local" | "track">("local")
     const [isTimeLeft, setIsTimeLeft] = useState<number>(timeLeft ?? 0)
 
-    const race = nextRace?.date + "T" + nextRace?.time
-    const firstPractice = nextRace.FirstPractice?.date + "T" + nextRace.FirstPractice?.time
+    const raceTime = nextRace?.date + "T" + nextRace?.time
+    const firstPracticeTime = nextRace.FirstPractice?.date+"T"+nextRace.FirstPractice?.time
+
+    const raceDateObj = new Date(raceTime)
+    const race =
+        timeMode === "local"
+            ? `${pad(raceDateObj.getHours())}:${pad(raceDateObj.getMinutes())}`
+            : getTimeInOffset(nextRace.date as string, nextRace.time, nextMeeting?.gmt_offset as string)
+    const firstPracticeDateObj = new Date(firstPracticeTime)
+    const firstPractice =
+        timeMode === "local"
+            ? `${pad(firstPracticeDateObj.getHours())}:${pad(firstPracticeDateObj.getMinutes())}`
+            : getTimeInOffset(nextRace.FirstPractice?.date as string, nextRace.FirstPractice?.time, nextMeeting?.gmt_offset as string)
 
     const Separator = ({axle}: {axle: "x" | "y"}) => <div className={`${axle === "x" ? "h-0.5 w-full" : "h-full w-0.5"} bg-gray-600`} />
 
@@ -48,10 +59,10 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
         })
 
     const NextRaceLayout = ({nextMeeting}: {nextMeeting: Meeting}) => {
-        const firstDate = pad(new Date(firstPractice).getUTCDate())
-        const secondDate = pad(new Date(race).getUTCDate())
-        const firstMonth = getMonthShort(new Date(firstPractice))
-        const secondMonth = getMonthShort(new Date(race))
+        const firstDate = pad(new Date(firstPracticeTime).getUTCDate())
+        const secondDate = pad(new Date(raceTime).getUTCDate())
+        const firstMonth = getMonthShort(new Date(firstPracticeTime))
+        const secondMonth = getMonthShort(new Date(raceTime))
 
         const months = firstMonth === secondMonth ? firstMonth : `${firstMonth}-${secondMonth}`
 
@@ -96,7 +107,7 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
     const Countdown = () => {
         if (!nextMeeting) return null
 
-        const diffMs = new Date(race).getTime() - Date.now()
+        const diffMs = new Date(raceTime).getTime() - Date.now()
         const oneDay = 24 * 60 * 60 * 1000
 
         if (diffMs <= 0) return <p className="text-white text-center">Started!</p>
@@ -107,7 +118,7 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
             const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
             useEffect(() => {
                 const interval = setInterval(() => {
-                    setIsTimeLeft(new Date(race).getTime() - Date.now())
+                    setIsTimeLeft(new Date(raceTime).getTime() - Date.now())
                 }, 60000)
                 return () => clearInterval(interval)
             }, [])
@@ -125,7 +136,7 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
         const {hours, minutes, seconds} = formatTime(diffMs)
         useEffect(() => {
             const interval = setInterval(() => {
-                setIsTimeLeft(new Date(race).getTime() - Date.now())
+                setIsTimeLeft(new Date(raceTime).getTime() - Date.now())
             }, 1000)
             return () => clearInterval(interval)
         }, [])
@@ -202,10 +213,10 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
                             <Separator axle="x" />
                             <div className="grid grid-cols-3 w-full">
                                 <p className="text-white">RACE</p>
-                                <p className="text-gray-500 text-center">{getWeekdayShort(new Date(race))}</p>
+                                <p className="text-gray-500 text-center">{getWeekdayShort(new Date(raceTime))}</p>
                                 <div className="py-2 px-6 bg-gray-600 rounded-lg">
                                     <p className="text-white text-center">
-                                        {pad(new Date(race).getHours())}:{pad(new Date(race).getMinutes())}
+                                        {race}
                                     </p>
                                 </div>
                             </div>
