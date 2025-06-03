@@ -73,7 +73,7 @@ export function Navbar({
         <div className={`flex max-sm:flex-col flex-row  min-lg:h-screen ${pathname.includes("tracks") || pathname.includes("pilots") ? 'bg-gray-950' : 'bg-gray-950'} px-1`}>
             {/* SIDEBAR */}
             <div
-                className={`bg-gray-50 w-56 p-2 px-3 shadow-2xl flex flex-col gap-8 items-center rounded-md z-10 showSideBar max-sm:hidden`}
+                className={`bg-gray-50 w-56 p-2 px-3 shadow-2xl flex flex-col gap-8 items-center rounded-md z-10 hiddenSideBar max-sm:hidden`}
                 id="sidebar"
             >
                 {/* F1 IMAGE AND SANDWICH BUTTON */}
@@ -131,7 +131,7 @@ export function Navbar({
             </div>
 
             {/* MAIN CONTENT */}
-            <div className="w-full overflow-hidden max-sm:h-calc(100vh-235px) relative">{children}</div>
+            <div className="w-full overflow-hidden h-calc(100vh-235px) relative">{children}</div>
         </div>
     )
 }

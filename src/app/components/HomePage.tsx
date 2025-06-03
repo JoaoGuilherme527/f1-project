@@ -163,7 +163,7 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
     )
 
     return (
-        <div className="min-h-screen bg-gray-950">
+        <div className="min-lg:h-screen bg-gray-950 overflow-y-scroll">
             {nextRace && (
                 <section className="p-4 flex flex-col items-center bg-gray-950 text-gray-50 gap-2 border-b-2 border-gray-600">
                     <h2 className="text-3xl font-semibold mask-t-from-6">Next Race</h2>
@@ -171,11 +171,12 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
                 </section>
             )}
             {nextMeeting && (
-                <div className="flex items-start gap-4 p-4  max-sm:flex-col max-sm:pb-4">
+                <div className="flex items-start gap-4 p-4 max-sm:flex-col max-sm:pb-4 pb-10">
                     <div className="flex flex-col gap-4 w-full">
                         <NextRaceLayout nextMeeting={nextMeeting} />
                         <Countdown />
                     </div>
+
                     <div className="flex flex-col items-center gap-4 w-full">
                         <div className="flex flex-col items-center w-full justify-between bg-gray-800 p-4 gap-6 rounded-lg">
                             <div className="grid grid-cols-2 gap-4 bg-gray-800 w-full rounded-lg ">
@@ -209,8 +210,56 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
                                 </div>
                             </div>
                         </div>
+                        <div className="flex flex-col items-center w-full border-2 border-gray-600 rounded-lg">
+                            <h2 className=" py-4 text-3xl font-semibold mask-b-from-5 text-gray-50 text-center w-full">Team Standings</h2>
+                            <div className="flex flex-col items-center w-full border-t-2 border-gray-600">
+                                {teamStandingList
+                                    .sort((a, b) => Number(a.position) - Number(b.position))
+                                    .map(({position, points, Constructor}, index) => {
+                                        const filteredTeam = teams.filter(
+                                            ({constructorId}) => constructorId === Constructor.constructorId
+                                        )[0]
+
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="w-full flex items-center border-b-2 border-gray-600 text-white"
+                                                // style={{background: color}}
+                                            >
+                                                <div className="w-14 py-2 border-r-2 border-gray-600">
+                                                    <h1 className="text-center text-sm">{position}</h1>
+                                                </div>
+                                                <div className="flex items-center gap-2 w-full">
+                                                    <div className="w-[48px] flex justify-center items-center">
+                                                        <Image alt="Team Logo" src={filteredTeam.logo} height={36} width={22} />
+                                                    </div>
+                                                    <div className="flex items-center gap-1">
+                                                        <p
+                                                            className="text-shadow text-md"
+                                                            style={{
+                                                                fontFamily: "Formula1 Display Bold",
+                                                            }}
+                                                        >
+                                                            {filteredTeam.name.toUpperCase()}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div className="bg-gray-800 w-14 py-2">
+                                                    <h1
+                                                        style={{fontFamily: "Formula1 Display Bold"}}
+                                                        className="text-center text-white text-sm"
+                                                    >
+                                                        {points}
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex flex-col items-center w-full border-2 border-gray-600 rounded-lg">
+
+                    <div className="flex flex-col items-center w-full  border-2 border-gray-600 rounded-lg">
                         <h2 className=" py-4 text-3xl font-semibold mask-b-from-5 text-gray-50 text-center w-full">Driver Standings</h2>
                         <div className="flex flex-col items-center w-full border-t-2 border-gray-600">
                             {driverStandingList
@@ -250,51 +299,6 @@ export default function HomePage({driverStandingList, nextRace, nextMeeting, tra
                                                         }}
                                                     >
                                                         {Driver.familyName.toUpperCase()}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="bg-gray-800 w-14 py-2">
-                                                <h1
-                                                    style={{fontFamily: "Formula1 Display Bold"}}
-                                                    className="text-center text-white text-sm"
-                                                >
-                                                    {points}
-                                                </h1>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center w-full border-2 border-gray-600 rounded-lg">
-                        <h2 className=" py-4 text-3xl font-semibold mask-b-from-5 text-gray-50 text-center w-full">Team Standings</h2>
-                        <div className="flex flex-col items-center w-full border-t-2 border-gray-600">
-                            {teamStandingList
-                                .sort((a, b) => Number(a.position) - Number(b.position))
-                                .map(({position, points, Constructor}, index) => {
-                                    const filteredTeam = teams.filter(({constructorId}) => constructorId === Constructor.constructorId)[0]
-
-                                    return (
-                                        <div
-                                            key={index}
-                                            className="w-full flex items-center border-b-2 border-gray-600 text-white"
-                                            // style={{background: color}}
-                                        >
-                                            <div className="w-14 py-2 border-r-2 border-gray-600">
-                                                <h1 className="text-center text-sm">{position}</h1>
-                                            </div>
-                                            <div className="flex items-center gap-2 w-full">
-                                                <div className="w-[48px] flex justify-center items-center">
-                                                    <Image alt="Team Logo" src={filteredTeam.logo} height={36} width={22} />
-                                                </div>
-                                                <div className="flex items-center gap-1">
-                                                    <p
-                                                        className="text-shadow text-md"
-                                                        style={{
-                                                            fontFamily: "Formula1 Display Bold",
-                                                        }}
-                                                    >
-                                                        {filteredTeam.name.toUpperCase()}
                                                     </p>
                                                 </div>
                                             </div>
