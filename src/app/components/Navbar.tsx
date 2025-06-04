@@ -24,7 +24,7 @@ export function Navbar({
     const routes: Array<Route> = [
         {href: "/", name: "Home", iconName: "home"},
         {href: "/search/tracks", name: "Race tracks", iconName: "tracks"},
-        {href: "/search/pilots", name: "Drivers", iconName: "pilots"},
+        {href: "/search/drivers", name: "Drivers", iconName: "pilots"},
     ]
 
     function RouteComponent({route}: {route: Route}) {
@@ -70,7 +70,7 @@ export function Navbar({
     }
 
     return (
-        <div className={`flex max-sm:flex-col flex-row  min-lg:h-screen ${pathname.includes("tracks") || pathname.includes("pilots") ? 'bg-gray-950' : 'bg-gray-950'} px-1`}>
+        <div className={`flex max-sm:flex-col flex-row  min-lg:h-screen ${pathname.includes("tracks") || pathname.includes("drivers") ? 'bg-gray-950' : 'bg-gray-950'} px-1`}>
             {/* SIDEBAR */}
             <div
                 className={`bg-gray-50 w-56 p-2 px-3 shadow-2xl flex flex-col gap-8 items-center rounded-md z-10 hiddenSideBar max-sm:hidden`}
