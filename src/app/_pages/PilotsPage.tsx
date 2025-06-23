@@ -162,7 +162,7 @@ export default function PilotsPage({drivers, driversOpenF1, teams}: PilotsPagePr
 
         return (
             <div
-                className={`gap-4 p-4 w-full max-w-full overflow-y-auto transition-all flex flex-wrap`}
+                className={`gap-4 p-4 w-full max-w-full overflow-y-auto transition-all min-lg:grid-cols-2 grid max-sm:flex flex-wrap`}
                 style={{
                     columns: "4 200px",
                 }}
@@ -192,29 +192,31 @@ export default function PilotsPage({drivers, driversOpenF1, teams}: PilotsPagePr
                 Drivers
             </h1>
             <div className="flex flex-col gap-2 py-2 w-full">
-                <div className="flex gap-2 px-4 transition-all">
+                <div className="gap-2 px-4 transition-all max-sm:grid grid-rows-2 grid-cols-2 flex">
+                    <div className="flex items-center h-full gap-2 col-span-2 w-full min-sm:w-1/2">
+                        <input
+                            className="w-full rounded h-full bg-[#1e293960] p-2 border border-gray-800 text-white"
+                            placeholder="Search driver"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <button
+                            onClick={Search}
+                            className="flex flex-row h-full w-12 px-2 items-center bg-blue-900 border border-gray-800 rounded-md disabled:opacity-50 cursor-pointer"
+                        >
+                            <SearchIcon size={24} color="#FFFFFF" />
+                        </button>
+                    </div>
                     <button
                         className={`${
-                            activeAllDrivers ? "bg-blue-900" : "bg-[#1e293960]"
-                        } h-full w-1/2 p-2 text-white border border-gray-800 rounded disabled:opacity-50 cursor-pointer`}
+                            activeAllDrivers ? "bg-blue-900 col-span-2" : "bg-[#1e293960]"
+                        } h-full p-2 text-white border border-gray-800 rounded disabled:opacity-50 cursor-pointer`}
                         onClick={() => setActiveAllDrivers(!activeAllDrivers)}
                     >
                         See all Drivers
                     </button>
-                    <input
-                        className="w-full rounded bg-[#1e293960] p-2 border border-gray-800 text-white"
-                        placeholder="Search driver"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button
-                        onClick={Search}
-                        className="flex flex-row h-12 w-12 px-2 items-center bg-blue-900 border border-gray-800 rounded-md disabled:opacity-50 cursor-pointer"
-                    >
-                        <SearchIcon size={24} color="#FFFFFF" />
-                    </button>
                     {!activeAllDrivers && (
-                        <div className="flex flex-row gap-2 items-center">
+                        <div className="flex flex-row gap-2 items-center h-full">
                             <button
                                 className="bg-[#1e293960] h-full px-2 border border-gray-800 rounded-md disabled:opacity-50"
                                 disabled={isYear <= 1950}
@@ -236,7 +238,7 @@ export default function PilotsPage({drivers, driversOpenF1, teams}: PilotsPagePr
                                 min="2023"
                                 value={isYear}
                                 onChange={(e) => setIsYear(Number(e.target.value))}
-                                className="w-full rounded bg-[#1e293960] p-2 border border-gray-800 text-white outline-none cursor-default text-center"
+                                className="w-full rounded bg-[#1e293960] p-2 border border-gray-800 h-full text-white outline-none cursor-default text-center"
                             />
                             <button
                                 className="bg-[#1e293960] h-full px-2 border border-gray-800 rounded-md disabled:opacity-50 "
@@ -260,7 +262,7 @@ export default function PilotsPage({drivers, driversOpenF1, teams}: PilotsPagePr
                 </div>
             </div>
             {activeAllDrivers ? (
-                <div className={`gap-4 p-4 w-full max-w-full overflow-y-auto transition-all max-sm:grid-cols-1 max-lg:grid-cols-2 grid`}>
+                <div className={`gap-4 p-4 w-full max-w-full overflow-y-auto transition-all max-sm:grid-cols-1 min-lg:grid-cols-2 grid`}>
                     {filteredAllDrivers?.map((item, index) => (
                         <div
                             key={index}
