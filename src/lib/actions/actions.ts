@@ -53,7 +53,7 @@ export async function GetCircuits(): Promise<Array<Track>> {
 }
 
 export async function GetTeams(name?: string): Promise<Team[]> {
-    return teams
+    return teams as any
 }
 
 export async function GetErgastTeams(): Promise<Array<Constructor>> {
