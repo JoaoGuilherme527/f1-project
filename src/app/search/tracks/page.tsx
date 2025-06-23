@@ -1,4 +1,4 @@
-import TracksPage from "@/app/components/TracksPage"
+import TracksPage from "@/app/_pages/TracksPage"
 import {GetCircuits} from "@/lib/actions/actions"
 
 export default async function Render() {

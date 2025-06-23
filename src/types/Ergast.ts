@@ -9,7 +9,13 @@ interface ErgastBaseResponse {
     RaceTable: RaceTable;
     StandingsTable: StandingsTable;
     DriverTable: DriverTable;
+    ConstructorTable: ConstructorTable
   };
+}
+
+interface ConstructorTable{
+  season: string;
+  Constructors: Constructor[]
 }
 
 interface RaceTable {

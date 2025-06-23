@@ -1,6 +1,14 @@
-import {GetCircuits, GetDrivers, GetErgastDriverStandingList, GetErgastRaces, GetErgastTeamStandingList, GetMeetings, GetTeams} from "@/lib/actions/actions"
+import {
+    GetCircuits,
+    GetDrivers,
+    GetErgastDriverStandingList,
+    GetErgastRaces,
+    GetErgastTeamStandingList,
+    GetMeetings,
+    GetTeams,
+} from "@/lib/actions/actions"
 import {getNextMeeting} from "@/lib/utils"
-import HomePage from "./components/HomePage"
+import HomePage from "./_pages/HomePage"
 import {Metadata, ResolvingMetadata} from "next"
 
 type Props = {
@@ -54,7 +62,7 @@ export async function generateMetadata({params, searchParams}: Props, parent: Re
 
 export default async function Render() {
     try {
-        const [races, meetings, driverStandingList,teamStandingList, tracks, drivers, teams] = await Promise.all([
+        const [races, meetings, driverStandingList, constructors, tracks, drivers, teams] = await Promise.all([
             GetErgastRaces(),
             GetMeetings(),
             GetErgastDriverStandingList(),
@@ -68,10 +76,10 @@ export default async function Render() {
         const nextRace = races && races.filter(({round}) => Number(round) === nextMeeting?.circuit_key)[0]
         const timeLeft = nextMeeting && new Date(nextMeeting.date_start).getTime() - Date.now()
         const findTrackMeeting = tracks.filter(({flag, src}) => flag == nextMeeting?.flag && src !== "")[0]
-        
+
         return (
             <HomePage
-                teamStandingList={teamStandingList}
+                constructors={constructors}
                 drivers={drivers}
                 teams={teams}
                 driverStandingList={driverStandingList}

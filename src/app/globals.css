@@ -17,7 +17,7 @@
 
 body {
     font-family: "Formula1 Display Regular";
-    background-color: #101828;
+    background-color: #030712;
 }
 
 /* globals.css */
@@ -36,6 +36,10 @@ html {
     html {
         font-size: 14px;
     }
+}
+
+* {
+    --team-color: var(--color-red-500);
 }
 
 .bg-plusPattern64 {
@@ -80,4 +84,16 @@ section::after {
     height: 250%;
     background: linear-gradient(#fb2c36 80%, #fb2c3650);
     z-index: 0;
+}
+
+.teamCard::before {
+    content: "";
+    border-radius: 0 10px 0 10px;
+    inset: 8px;
+    top: 40px;
+    left: 40px;
+    position: absolute;
+    border: 4px solid var(--team-color);
+    border-bottom: none;
+    border-left: none;
 }

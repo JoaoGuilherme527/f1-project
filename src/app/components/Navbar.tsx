@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import React from "react"
+import React, {useLayoutEffect, useState} from "react"
 import {Menu, House, Search} from "@deemlol/next-icons"
 import "../styles/Navbar.css"
 import {Icon, IconName, icons} from "../../../public/icons/icons"
@@ -20,15 +20,21 @@ export function Navbar({
     children: React.ReactNode
 }>) {
     const pathname = usePathname()
+    const [routeActive, setRouteActive] = useState("/")
 
     const routes: Array<Route> = [
         {href: "/", name: "Home", iconName: "home"},
         {href: "/search/tracks", name: "Race tracks", iconName: "tracks"},
         {href: "/search/drivers", name: "Drivers", iconName: "pilots"},
+        {href: "/search/teams", name: "Teams", iconName: "teams"},
     ]
 
+    useLayoutEffect(()=>{
+        setRouteActive(pathname)
+    },[])
+
     function RouteComponent({route}: {route: Route}) {
-        const isActive = pathname === route.href
+        const isActive = routeActive === route.href
         const isActiveClass = isActive ? "bg-red-400" : "bg-gray-100"
         const isActiveTextClass = isActive ? "text-white" : "text-gray-800"
         const isActiveIconClass = isActive ? "text-white" : "text-gray-800"
@@ -40,13 +46,16 @@ export function Navbar({
                     isActive ? "activeRoute relative" : " hover:bg-gray-200 transition duration-300 ease-in-out"
                 } max-sm:flex-row-reverse max-sm:gap-2 max-sm:justify-center max-sm:items-center`}
                 onClick={() => {
-                    const sidebarMobile = document.querySelector("#sidebarMobile")
-                    sidebarMobile?.classList.add("hiddenSideBarMobile")
-                    sidebarMobile?.classList.remove("showSideBarMobile")
+                    setRouteActive(route.href)
+                    // setTimeout(() => {
+                        const sidebarMobile = document.querySelector("#sidebarMobile")
+                        sidebarMobile?.classList.add("hiddenSideBarMobile")
+                        sidebarMobile?.classList.remove("showSideBarMobile")
+                    // }, 500)
                 }}
             >
                 <div className={`p-1 ${isActiveIconClass} z-10`}>
-                    <Icon icon={route.iconName} className="w-6 rotate-y-180" />
+                    <Icon icon={route.iconName} className="w-6" />
                 </div>
                 <div className={`flex items-center justify-center z-10  ${isActiveTextClass}`}>
                     <h2 className={`w-[120px] max-sm:text-center ${isActiveTextClass}`}>{route.name}</h2>
@@ -70,7 +79,11 @@ export function Navbar({
     }
 
     return (
-        <div className={`flex max-sm:flex-col flex-row  min-lg:h-screen ${pathname.includes("tracks") || pathname.includes("drivers") ? 'bg-gray-950' : 'bg-gray-950'} px-1`}>
+        <div
+            className={`flex max-sm:flex-col flex-row  min-lg:h-screen ${
+                pathname.includes("tracks") || pathname.includes("drivers") ? "bg-gray-950" : "bg-gray-950"
+            } px-1`}
+        >
             {/* SIDEBAR */}
             <div
                 className={`bg-gray-50 w-56 p-2 px-3 shadow-2xl flex flex-col gap-8 items-center rounded-md z-10 hiddenSideBar max-sm:hidden`}
@@ -103,12 +116,12 @@ export function Navbar({
 
             {/* SIDEBAR MOBILE */}
             <div
-                className={`bg-gray-50 w-full h-58 p-2 px-3 pb-4 flex flex-col gap-8 items-center rounded-md z-10 min-sm:hidden mt-2 hiddenSideBarMobile shadow-2xl`}
+                className={`bg-gray-50 w-full h-58 p-2 px-3 pb-4 flex flex-col gap-4 items-center rounded-md z-10 min-sm:hidden mt-2 hiddenSideBarMobile shadow-2xl`}
                 id="sidebarMobile"
             >
                 {/* F1 IMAGE AND SANDWICH BUTTON */}
                 <div className="flex items-center gap-2 w-full flex-row-reverse">
-                    <div className="px-1 z-10">
+                    <div className="p-2 z-10 rounded bg-[#00000020]">
                         <Menu
                             size={24}
                             color="black"

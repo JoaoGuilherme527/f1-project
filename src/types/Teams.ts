@@ -4,6 +4,6 @@ interface Team {
     logo: string
     variant: string
     color: string
-    pilots: Array<string>
+    pilots: Array<{ year: string, drivers: Array<string> }>
     car: string
 }

@@ -52,8 +52,14 @@ export async function GetCircuits(): Promise<Array<Track>> {
     return tracks
 }
 
-export async function GetTeams(name?: string): Promise<Array<Team>> {
-    return name ? teams.filter((team) => team.name === name) : teams
+export async function GetTeams(name?: string): Promise<Team[]> {
+    return teams
+}
+
+export async function GetErgastTeams(): Promise<Array<Constructor>> {
+    const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/constructors/?format=json")
+    const data: ErgastResponse = await res.json()
+    return data.MRData.ConstructorTable.Constructors
 }
 
 export async function GetErgastRaces(): Promise<Race[]> {
@@ -62,8 +68,9 @@ export async function GetErgastRaces(): Promise<Race[]> {
     return data.MRData.RaceTable.Races
 }
 
-export async function GetErgastDrivers(): Promise<DriverErgast[]> {
-    const res = await fetch("https://api.jolpi.ca/ergast/f1/2025/drivers/?format=json")
+export async function GetErgastDrivers(year?: number): Promise<DriverErgast[]> {
+    const date = new Date()
+    const res = await fetch(`https://api.jolpi.ca/ergast/f1/${year ?? date.getUTCFullYear()}/drivers/?format=json`)
     const data: ErgastResponse = await res.json()
     return data.MRData.DriverTable.Drivers
 }
